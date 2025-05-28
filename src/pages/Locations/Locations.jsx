@@ -2,7 +2,7 @@ import location from "/images/location.png";
 import bagelPin from "/images/bagelPin.png";
 import LocationItem from "./LocationItem.jsx";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 // todo conevrt all address to geo location
 // center location should be user's current location
@@ -127,8 +127,82 @@ const dummyLocations = [
   },
 ];
 
+// Function to calculate distance in miles between two geolocations
+const getDistanceMiles = (lat1, lon1, lat2, lon2) => {
+  const toRadians = (deg) => (deg * Math.PI) / 180;
+  const R = 3959; // Earth radius in miles
+
+  const φ1 = toRadians(lat1);
+  const φ2 = toRadians(lat2);
+  const Δφ = toRadians(lat2 - lat1);
+  const Δλ = toRadians(lon2 - lon1);
+
+  const a =
+    Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+    Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+  return R * c; // Distance in miles
+};
+
 const Locations = () => {
   const [mapCenter, setMapCenter] = useState(center);
+  const [userLocation, setUserLocation] = useState(null);
+  const [sortedLocations, setSortedLocations] = useState([]);
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const userLoc = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+          setUserLocation(userLoc);
+          setMapCenter(userLoc);
+
+          // Calculate distances once after getting user location
+          dummyLocations.forEach((location) => {
+            location.miles = getDistanceMiles(
+              userLoc.lat,
+              userLoc.lng,
+              location.geolocation[0],
+              location.geolocation[1]
+            ).toFixed(2);
+          });
+
+          // If you want to force re-render after updating dummyLocations
+          // you can also use state to store dummyLocations, or just force update.
+        },
+        (error) => {
+          console.error("Error getting location:", error);
+        }
+      );
+    } else {
+      console.error("Geolocation is not supported by this browser.");
+    }
+  }, []);
+
+  // Second useEffect to sort locations based on distance from given location
+  useEffect(() => {
+    if (!userLocation) return;
+
+    const sortedLocations = [...dummyLocations]
+      .map((location) => {
+        const miles = getDistanceMiles(
+          userLocation.lat,
+          userLocation.lng,
+          location.geolocation[0],
+          location.geolocation[1]
+        );
+        return { ...location, miles: miles.toFixed(2) };
+      })
+      .filter((location) => parseFloat(location.miles) < 150)
+      .sort((a, b) => parseFloat(a.miles) - parseFloat(b.miles));
+
+    setSortedLocations(sortedLocations);
+  }, [userLocation]);
 
   const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
   if (!apiKey) {
@@ -178,6 +252,7 @@ const Locations = () => {
               boxSizing: "border-box",
             }}
           />
+
           <span
             style={{
               position: "absolute",
@@ -220,7 +295,7 @@ const Locations = () => {
             marginTop: "1vw",
           }}
         >
-          {dummyLocations.map((location, index) => (
+          {sortedLocations.map((location, index) => (
             <LocationItem
               key={index}
               image={location.image}
@@ -286,7 +361,7 @@ const Locations = () => {
               maxZoom: 10,
             }}
           >
-            <Marker position={mapCenter} title="Center Location" />
+            <Marker position={userLocation} title="Center Location" />
 
             {dummyLocations.map((location, index) => (
               <Marker
