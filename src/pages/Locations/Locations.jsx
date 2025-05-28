@@ -1,13 +1,8 @@
 import location from "/images/location.png";
 import bagelPin from "/images/bagelPin.png";
 import LocationItem from "./LocationItem.jsx";
-import {
-  GoogleMap,
-  LoadScript,
-  Marker,
-  useJsApiLoader,
-} from "@react-google-maps/api";
-import React, { useEffect, useState } from "react";
+import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import React, { useState } from "react";
 
 // todo conevrt all address to geo location
 // center location should be user's current location
@@ -133,6 +128,8 @@ const dummyLocations = [
 ];
 
 const Locations = () => {
+  const [mapCenter, setMapCenter] = useState(center);
+
   const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
   if (!apiKey) {
     console.error("Google Maps API key is not defined.");
@@ -233,6 +230,13 @@ const Locations = () => {
               phone={location.phone}
               hours={location.hours}
               address={location.address}
+              onClick={() => {
+                setMapCenter({
+                  lat: location.geolocation[0],
+                  lng: location.geolocation[1],
+                });
+                console.log("Clicked:", location.city);
+              }}
             />
           ))}
         </div>
@@ -271,7 +275,7 @@ const Locations = () => {
               height: "100%",
               borderRadius: "1vw",
             }}
-            center={center}
+            center={mapCenter}
             zoom={14}
             options={{
               mapTypeControl: false, // Hide map type buttons (Satellite, Terrain, etc)
@@ -282,7 +286,7 @@ const Locations = () => {
               maxZoom: 10,
             }}
           >
-            <Marker position={center} title="Center Location" />
+            <Marker position={mapCenter} title="Center Location" />
 
             {dummyLocations.map((location, index) => (
               <Marker

@@ -6,9 +6,11 @@ const LocationItem = ({
   phone,
   hours,
   address,
+  onClick,
 }) => {
   return (
     <div
+      onClick={onClick}
       style={{
         display: "flex",
         alignItems: "flex-start",
@@ -16,6 +18,7 @@ const LocationItem = ({
         borderBottom: "1px solid #ccc",
         fontFamily: "sans-serif",
         gap: "1vw",
+        cursor: "pointer",
       }}
     >
       <img
