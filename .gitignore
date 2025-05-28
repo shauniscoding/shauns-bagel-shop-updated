@@ -1,0 +1,58 @@
+# Dependencies
+/node_modules/
+
+# Production build output
+/dist/
+/build/
+
+# Local env files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor directories and files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional coverage directory for tests
+/coverage/
+
+# Miscellaneous
+*.log
+*.lock
+
+# Storybook build files (if used)
+/storybook-static/
+
+# Parcel-bundler cache (if used)
+.cache/
+
+# Mac system files
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# React Native (if ever used)
+/ios/build/
+/android/build/

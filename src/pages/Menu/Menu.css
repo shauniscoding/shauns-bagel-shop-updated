@@ -1,0 +1,21 @@
+.menu-category {
+  width: 14vw;
+  height: 4vw;
+  flex-shrink: 0;
+  border-radius: 1vw;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.menu-category:hover {
+  filter: grayscale(50%);
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.menu-items {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(29, 29, 29, 0.6) transparent;
+}
