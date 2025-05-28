@@ -1,7 +1,13 @@
+import "./Locations.css";
 import location from "/images/location.png";
 import bagelPin from "/images/bagelPin.png";
 import LocationItem from "./LocationItem.jsx";
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  LoadScript,
+  Marker,
+  Autocomplete,
+} from "@react-google-maps/api";
 import React, { useState, useEffect } from "react";
 
 // todo conevrt all address to geo location
@@ -150,6 +156,7 @@ const Locations = () => {
   const [mapCenter, setMapCenter] = useState(center);
   const [userLocation, setUserLocation] = useState(null);
   const [sortedLocations, setSortedLocations] = useState([]);
+  const [distance, setDistance] = useState("100");
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -198,11 +205,11 @@ const Locations = () => {
         );
         return { ...location, miles: miles.toFixed(2) };
       })
-      .filter((location) => parseFloat(location.miles) < 150)
+      .filter((location) => parseFloat(location.miles) < distance)
       .sort((a, b) => parseFloat(a.miles) - parseFloat(b.miles));
 
     setSortedLocations(sortedLocations);
-  }, [userLocation]);
+  }, [userLocation, distance]);
 
   const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
   if (!apiKey) {
@@ -212,137 +219,81 @@ const Locations = () => {
 
   return (
     <div style={{ display: "flex", flexDirection: "row", height: "100vh" }}>
-      <aside
-        className="menu-container"
-        style={{
-          position: "fixed",
-          left: 0,
-          top: 0,
-          width: "26vw",
-          height: "100vh",
-          borderRight: "none",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "flex-start",
-          alignItems: "center",
-          paddingTop: "1vw",
-          boxSizing: "border-box",
-        }}
-      >
+      <aside className="locations-sidebar-container">
         <h1 style={{ fontSize: "2.1vw", marginBottom: "0px" }}>
           Find a Location
         </h1>
-        <div
-          style={{
-            position: "relative",
-            width: "80%",
-          }}
-        >
-          <input
-            type="text"
-            placeholder="Address, City, or Zip Code"
-            style={{
-              width: "100%",
-              height: "45px",
-              padding: "0 40px 0 10px",
-              fontSize: "16px",
-              border: "1px solid #ccc",
-              borderRadius: "5px",
-              outline: "none",
-              boxSizing: "border-box",
-            }}
-          />
-
-          <span
-            style={{
-              position: "absolute",
-              right: "10px",
-              top: "50%",
-              transform: "translateY(-50%)",
-              fontSize: "20px",
-              color: "#888",
-              pointerEvents: "none",
-            }}
-          >
-            <img
-              src={location}
-              alt="icon"
-              style={{
-                position: "absolute",
-                right: "10px",
-                top: "50%",
-                transform: "translateY(-50%)",
-                width: "1vw",
-                height: "1vw",
-                pointerEvents: "none",
-              }}
-            />
-          </span>
-        </div>
 
         <div
           style={{
             display: "flex",
-            flexDirection: "column",
+            width: "90%",
             alignItems: "center",
-            gap: "1vw",
-            width: "100%",
-            height: "100%",
-            overflowY: "scroll",
-            scrollbarWidth: "none",
-            msOverflowStyle: "none",
-            boxSizing: "border-box",
-            marginTop: "1vw",
+            justifyContent: "center",
           }}
         >
-          {sortedLocations.map((location, index) => (
-            <LocationItem
-              key={index}
-              image={location.image}
-              city={location.city}
-              street={location.street}
-              miles={location.miles}
-              phone={location.phone}
-              hours={location.hours}
-              address={location.address}
-              onClick={() => {
-                setMapCenter({
-                  lat: location.geolocation[0],
-                  lng: location.geolocation[1],
-                });
-                console.log("Clicked:", location.city);
-              }}
+          <div
+            style={{
+              position: "relative",
+              width: "80%",
+            }}
+          >
+            <input
+              type="text"
+              placeholder="Address, City, or Zip Code"
+              className="input-location"
             />
-          ))}
+
+            <span className="location-icon-container">
+              <img src={location} alt="icon" />
+            </span>
+          </div>
+
+          <select
+            className="distance-drop-down"
+            onChange={(e) => setDistance(e.target.value)}
+          >
+            <option value="1">1 mile</option>
+            <option value="5">5 miles</option>
+            <option value="10">10 miles</option>
+            <option value="25">25 miles</option>
+            <option value="50">50 miles</option>
+            <option value="100">100 miles</option>
+            <option value="150">150 miles</option>
+            <option value="500">500 miles</option>
+          </select>
+        </div>
+
+        <div className="locations-list-container">
+          {sortedLocations.length === 0 ? (
+            <p>No locations within {distance} miles.</p>
+          ) : (
+            sortedLocations.map((location, index) => (
+              <LocationItem
+                key={index}
+                image={location.image}
+                city={location.city}
+                street={location.street}
+                miles={location.miles}
+                phone={location.phone}
+                hours={location.hours}
+                address={location.address}
+                onClick={() => {
+                  setMapCenter({
+                    lat: location.geolocation[0],
+                    lng: location.geolocation[1],
+                  });
+                  console.log("Clicked:", location.city);
+                }}
+              />
+            ))
+          )}
         </div>
       </aside>
 
-      <div
-        style={{
-          backgroundColor: "#D9CAA0",
-          width: "5px",
-          height: "92vh",
-          position: "fixed",
-          left: "26vw",
-          top: "50%",
-          transform: "translateY(-50%)",
-        }}
-      ></div>
+      <div className="vertical-line"></div>
 
-      <div
-        className="menu-items-container"
-        style={{
-          width: "72%",
-          height: "92%",
-          position: "fixed",
-          marginLeft: "2vw",
-          left: "25vw",
-          marginTop: "2vw",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-        }}
-      >
+      <div className="google-map-container">
         <LoadScript googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
           <GoogleMap
             mapContainerStyle={{

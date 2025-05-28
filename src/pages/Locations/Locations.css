@@ -1,0 +1,117 @@
+.locations-sidebar-container {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 26vw;
+  height: 100vh;
+  border-right: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 1vw;
+  box-sizing: border-box;
+}
+
+.input-location {
+  width: 100%; /* or whatever width you want */
+  height: 45px;
+  padding: 0 10px 0 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-right: none; /* remove right border so it merges with select */
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.distance-drop-down {
+  height: 45px;
+  width: 45px; /* Set width just enough for the arrow */
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-left: 1px solid #ddd;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  outline: none;
+  box-sizing: border-box;
+  background-color: white;
+  cursor: pointer;
+
+  /* Remove default arrow */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  /* Hide the visible selected text */
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+
+  /* Custom arrow */
+  background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='12' viewBox='0 0 24 24' width='12' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 30px 20px;
+}
+
+.location-icon-container {
+  position: absolute;
+  right: 1px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: #888;
+  pointer-events: none;
+}
+
+.location-icon-container img {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1vw;
+  height: 1vw;
+  pointer-events: none;
+}
+
+.locations-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1vw;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  box-sizing: border-box;
+  margin-top: 1vw;
+}
+
+.locations-list-container::-webkit-scrollbar {
+  display: none;
+}
+
+.vertical-line {
+  background-color: #d9caa0;
+  width: 5px;
+  height: 92vh;
+  position: fixed;
+  left: 26vw;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.google-map-container {
+  width: 72%;
+  height: 92%;
+  position: fixed;
+  margin-left: 2vw;
+  left: 25vw;
+  margin-top: 2vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
