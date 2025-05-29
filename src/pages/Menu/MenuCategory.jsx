@@ -1,6 +1,6 @@
 import "./Menu.css";
 
-const MenuCategory = ({ image, category }) => {
+const MenuCategory = ({ image, category, onClick }) => {
   return (
     <div
       className="menu-category"
@@ -14,6 +14,7 @@ const MenuCategory = ({ image, category }) => {
         borderRadius: "1vw",
         position: "relative",
       }}
+      onClick={onClick}
     >
       <h1
         style={{
