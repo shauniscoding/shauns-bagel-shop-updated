@@ -1,4 +1,6 @@
 import "./Menu.css";
+import Navbar from "../Navbar/Navbar";
+
 import MenuItem from "./MenuItem";
 import MenuCategory from "./MenuCategory";
 import React, { useState } from "react";
@@ -196,6 +198,8 @@ const Menu = () => {
 
   return (
     <div style={{ display: "flex", flexDirection: "row", height: "100vh" }}>
+      <Navbar />
+
       <aside className="menu-container">
         <h1 style={{ fontSize: "2.4vw" }}>Our Menu</h1>
         <div className="menu-categories-container">

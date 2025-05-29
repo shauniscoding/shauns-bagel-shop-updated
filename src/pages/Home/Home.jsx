@@ -1,4 +1,5 @@
 import "./Home.css";
+import Navbar from "../Navbar/Navbar";
 import scollIndicator from "./assets/scroll.gif";
 import FeaturedItem from "./FeaturedItem";
 import Promotion from "./Promotion";
@@ -11,6 +12,8 @@ import donut_promotion from "/images/donut_promotion.jpg";
 const Home = () => {
   return (
     <div className="background">
+      <Navbar />
+
       {/* Main Content */}
       <main className="home-main">
         <video

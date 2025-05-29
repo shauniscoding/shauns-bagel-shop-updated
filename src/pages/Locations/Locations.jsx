@@ -1,4 +1,5 @@
 import "./Locations.css";
+import Navbar from "../Navbar/Navbar.jsx";
 import location from "/images/location.png";
 import bagelPin from "/images/bagelPin.png";
 import LocationItem from "./LocationItem.jsx";
@@ -219,6 +220,8 @@ const Locations = () => {
 
   return (
     <div style={{ display: "flex", flexDirection: "row", height: "100vh" }}>
+      <Navbar />
+
       <aside className="locations-sidebar-container">
         <h1 style={{ fontSize: "2.1vw", marginBottom: "0px" }}>
           Find a Location
