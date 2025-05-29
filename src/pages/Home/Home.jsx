@@ -1,5 +1,6 @@
 import "./Home.css";
 import Navbar from "../Navbar/Navbar";
+import Footer from "../Navbar/Footer";
 import scollIndicator from "./assets/scroll.gif";
 import FeaturedItem from "./FeaturedItem";
 import Promotion from "./Promotion";
@@ -100,6 +101,7 @@ For just $9.99, enjoy a dozen handcrafted donuts made fresh daily with care and 
           image={donut_promotion}
         />
       </div>
+      <Footer />
     </div>
   );
 };

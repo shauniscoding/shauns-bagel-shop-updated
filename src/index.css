@@ -3,10 +3,21 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100%;
+  width: 100vw;
   background-image: url("assets/background.JPG");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  width: 100vw;
+
+  /* Scrollbar hidden but scrolling enabled */
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+/* Hide scrollbar for WebKit browsers (Chrome, Safari, Opera) */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
 }
