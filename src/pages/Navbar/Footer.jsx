@@ -1,89 +1,70 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Footer.css";
+import instagram from "/images/instagram-icon.png";
+import facebook from "/images/facebook-icon.png";
+import youtube from "/images/youtube-icon.png";
+// import X from "/images/x-icon.webp";
+import X from "/images/x-icon.png";
 
 const Footer = () => {
   return (
-    <footer className="footer dark">
+    <footer className="footer">
       <div className="footer-columns">
-        <div className="footer-column">
-          <h5>Where To Pretend</h5>
-          <p>
-            <Link to="/locations">See Imaginary Locations</Link>
-          </p>
+        <div className="footer-section">
+          <h4>About Us</h4>
+          <Link to="/about">About</Link>
+          <a href="#">Our Story</a>
+          <a href="#">Careers</a>
+          <a href="#">Press</a>
         </div>
 
-        <div className="footer-column">
-          <h5>Bagel Rewards</h5>
-          <p>
-            <Link to="/join">Join Now</Link>
-          </p>
-          <p>
-            <Link to="/learn">Learn More</Link>
-          </p>
-          <p>
-            <Link to="/account">Manage Account</Link>
-          </p>
+        <div className="footer-section">
+          <h4>Menu & Services</h4>
+          <Link to="/menu">Menu</Link>
+          <Link to="/catering">Catering</Link>
+          <a href="#">Specials</a>
+          <a href="#">Gift Cards</a>
         </div>
 
-        <div className="footer-column">
-          <h5>News & Info</h5>
-          <p>
-            <Link to="/press">Fake Press Releases</Link>
-          </p>
-          <p>
-            <Link to="/about">About Our Non-Existence</Link>
-          </p>
-          <p>
-            <Link to="/support">Support Yourself</Link>
-          </p>
-          <p>
-            <Link to="/manuals">Make-Believe Manuals</Link>
-          </p>
-          <p>
-            <Link to="/signup">Newsletter Sign-Up</Link>
-          </p>
+        <div className="footer-section">
+          <h4>Visit Us</h4>
+          <Link to="/locations">Locations</Link>
+          <a href="#">Hours & Contact</a>
+          <a href="#">Franchise Opportunities</a>
         </div>
 
-        <div className="footer-column">
-          <h5>Other Sites</h5>
-          <p>
-            <a href="#">Fakebook</a>
-          </p>
-          <p>
-            <a href="#">InstaPretend</a>
-          </p>
-          <p>
-            <a href="#">Twittless</a>
-          </p>
+        <div className="footer-section">
+          <h4>Customer Support</h4>
+          <a href="#">FAQs</a>
+          <a href="#">Contact Us</a>
+          <a href="#">Allergens & Nutrition</a>
+          <a href="#">Feedback</a>
+        </div>
+
+        <div className="footer-section">
+          <h4>Legal</h4>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
         </div>
       </div>
 
       <div className="footer-bottom">
-        <div className="footer-links">
-          <Link to="/privacy">Privacy Policy</Link>
-          <Link to="/terms">Terms & Nonsense</Link>
-          <Link to="/contact">Contact the Void</Link>
-        </div>
-
+        <p>© 2025 Shaun's Bagel Shop. No rights reserved.</p>
         <div className="social-icons">
-          <a href="#" aria-label="Fake Facebook">
-            📘
+          <a href="#" aria-label="Instagram">
+            <img src={instagram} alt="Instagram" />
           </a>
-          <a href="#" aria-label="Fake Twitter">
-            🐦
+          <a href="#" aria-label="Facebook">
+            <img src={facebook} alt="Facebook" />
           </a>
-          <a href="#" aria-label="Fake Instagram">
-            📸
+          <a href="#" aria-label="Youtube">
+            <img src={youtube} alt="Facebook" />
           </a>
-          <a href="#" aria-label="Fake Tumblr">
-            📓
+          <a href="#" aria-label="X (formerly Twitter)">
+            <img src={X} alt="X (formerly Twitter)" />
           </a>
         </div>
-      </div>
-
-      <div className="footer-legal">
-        <p>© 2025 Shaun's Bagel Shop No Rights Reserved</p>
       </div>
     </footer>
   );
