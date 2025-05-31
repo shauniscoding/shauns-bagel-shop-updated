@@ -1,52 +1,89 @@
-// Footer.jsx
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Footer.css";
 
 const Footer = () => {
   return (
-    <footer className="footer">
-      <div className="footer-section contact">
-        <h4>Contact Us</h4>
-        <p>123 Bagel Lane, Doughville, NY 10001</p>
-        <p>(123) 456-7890</p>
-        <p>hello@bagelshop.com</p>
-      </div>
+    <footer className="footer dark">
+      <div className="footer-columns">
+        <div className="footer-column">
+          <h5>Where To Pretend</h5>
+          <p>
+            <Link to="/locations">See Imaginary Locations</Link>
+          </p>
+        </div>
 
-      <div className="footer-section links">
-        <h4>Quick Links</h4>
-        <Link to="/">Home</Link>
-        <Link to="/menu">Menu</Link>
-        <Link to="/locations">Locations</Link>
-        <Link to="/catering">Catering</Link>
-        <Link to="/about">About</Link>
-      </div>
+        <div className="footer-column">
+          <h5>Bagel Rewards</h5>
+          <p>
+            <Link to="/join">Join Now</Link>
+          </p>
+          <p>
+            <Link to="/learn">Learn More</Link>
+          </p>
+          <p>
+            <Link to="/account">Manage Account</Link>
+          </p>
+        </div>
 
-      <div className="footer-section hours">
-        <h4>Hours</h4>
-        <p>Mon - Fri: 7am - 3pm</p>
-        <p>Sat - Sun: 8am - 2pm</p>
-      </div>
+        <div className="footer-column">
+          <h5>News & Info</h5>
+          <p>
+            <Link to="/press">Fake Press Releases</Link>
+          </p>
+          <p>
+            <Link to="/about">About Our Non-Existence</Link>
+          </p>
+          <p>
+            <Link to="/support">Support Yourself</Link>
+          </p>
+          <p>
+            <Link to="/manuals">Make-Believe Manuals</Link>
+          </p>
+          <p>
+            <Link to="/signup">Newsletter Sign-Up</Link>
+          </p>
+        </div>
 
-      <div className="footer-section social">
-        <h4>Follow Us</h4>
-        <div className="social-icons">
-          <a href="#" aria-label="Instagram">
-            📸
-          </a>
-          <a href="#" aria-label="Facebook">
-            📘
-          </a>
-          <a href="#" aria-label="Twitter">
-            🐦
-          </a>
+        <div className="footer-column">
+          <h5>Other Sites</h5>
+          <p>
+            <a href="#">Fakebook</a>
+          </p>
+          <p>
+            <a href="#">InstaPretend</a>
+          </p>
+          <p>
+            <a href="#">Twittless</a>
+          </p>
         </div>
       </div>
 
       <div className="footer-bottom">
-        <p>© 2025 Bagel Shop. All rights reserved.</p>
-        <Link to="/privacy">Privacy Policy</Link>
-        <Link to="/terms">Terms of Service</Link>
+        <div className="footer-links">
+          <Link to="/privacy">Privacy Policy</Link>
+          <Link to="/terms">Terms & Nonsense</Link>
+          <Link to="/contact">Contact the Void</Link>
+        </div>
+
+        <div className="social-icons">
+          <a href="#" aria-label="Fake Facebook">
+            📘
+          </a>
+          <a href="#" aria-label="Fake Twitter">
+            🐦
+          </a>
+          <a href="#" aria-label="Fake Instagram">
+            📸
+          </a>
+          <a href="#" aria-label="Fake Tumblr">
+            📓
+          </a>
+        </div>
+      </div>
+
+      <div className="footer-legal">
+        <p>© 2025 Shaun's Bagel Shop No Rights Reserved</p>
       </div>
     </footer>
   );
