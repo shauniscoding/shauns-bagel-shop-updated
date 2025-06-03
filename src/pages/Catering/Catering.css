@@ -1,0 +1,8 @@
+.catering-splash-screen {
+    width: 100%;
+    height: 20px;
+    display: flex;
+    justify-content: center; /* centers horizontally */
+    align-items: center;     /* centers vertically */
+}
+
