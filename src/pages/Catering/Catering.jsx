@@ -43,25 +43,46 @@ const Catering = () => {
     >
       <Navbar />
 
-      <div className="catering-splash-screen">
+      <div className="catering-splash-screen" style={{ position: "relative" }}>
         <img
           src={buffet}
           alt="Buffet"
           style={{
             width: "100vw",
-            height: "66vh",
+            height: "70vh",
             objectFit: "cover",
             display: "block",
           }}
         />
+
+        <div
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            color: "black",
+            fontSize: "6vw",
+            // fontWeight: "bold",
+            fontFamily: "Arial, sans-serif",
+            width: "90%",
+            textShadow: "2px 2px 6px rgba(0,0,0,0.7)",
+            textAlign: "center",
+          }}
+        >
+          We Bring the Breakfast to You!
+        </div>
+      </div>
+
+
+      <div style={{ width: "100%", textAlign: "center", marginBottom: "0.6vw" }}>
+        <h1 style={{ fontSize: "2.8vw", margin: 0 }}>Perfect for any morning</h1>
       </div>
 
       <div
         className="catering-icons-container"
         style={{
-          // backgroundColor: "green",
           width: "100%",
-          padding: "2rem 1rem",
           display: "grid",
           gridTemplateColumns: `repeat(auto-fit, minmax(150px, 1fr))`,
           gap: "1vw",
@@ -78,6 +99,8 @@ const Catering = () => {
               alignItems: "center",
               textAlign: "center",
               maxWidth: "20vw",
+                        marginTop:"0px"
+
             }}
           >
             <div
@@ -116,8 +139,8 @@ const Catering = () => {
             </h2>
           </div>
         ))}
-
       </div>
+
 
       {/* <Footer /> */}
     </div>
