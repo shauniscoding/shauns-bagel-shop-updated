@@ -6,6 +6,7 @@ import people from "/images/people.png";
 import deal from "/images/deal.png";
 import event from "/images/event.png";
 import delivery from "/images/delivery.png";
+import CateringPackage  from "./CateringPackage";
 
 
 const iconData = [
@@ -76,7 +77,7 @@ const Catering = () => {
 
 
       <div style={{ width: "100%", textAlign: "center", marginBottom: "0.6vw" }}>
-        <h1 style={{ fontSize: "2.8vw", margin: 0 }}>Perfect for any morning</h1>
+        <h1 style={{ fontSize: "2.8vw", margin: 0 }}>Perfect for any morning!</h1>
       </div>
 
       <div
@@ -140,6 +141,26 @@ const Catering = () => {
           </div>
         ))}
       </div>
+
+        <h1 style={{fontSize: "6vw", fontFamily: "Arial, sans-serif", marginTop: "10vw", textAlign: "center"}}>
+          Our Packages
+        </h1>
+
+        <CateringPackage
+          title="The Morning Mixer"
+          description="Perfect for: Small teams, casual brunches, morning meetups"
+          image={buffet}
+          details={[
+            "Assorted fresh-baked bagels (12)",
+            "Choice of 3 cream cheeses (plain, veggie, cinnamon swirl)",
+            "Mini muffin tray (12)",
+            "Coffee traveler (serves 10)",
+            "Utensils, napkins, and cups included",
+            "Serves: 8–10 people"
+          ]}
+          price="$89.99"
+        />
+
 
 
       {/* <Footer /> */}
