@@ -12,6 +12,7 @@ import breakfastBoss from "/images/breakfastBoss.jpg"
 import donutDisturb from "/images/donutDisturb.webp";
 import bagelBar from "/images/bagelBar.jpg"
 import lightStart from "/images/lightStart.jpg";
+import { useNavigate } from "react-router-dom";
 
 
 const iconData = [
@@ -118,9 +119,37 @@ const cateringPackages = [
 
 ]
 
+const orderInstructions = [
+  {
+    image: "https://static.thenounproject.com/png/1633691-200.png",
+    title: "Package",
+    instruction: "Choose a package from our options and customize it"
+  },
+  {
+    image: "https://static.vecteezy.com/system/resources/previews/025/722/250/non_2x/order-food-icon-logo-isolated-on-white-background-vector.jpg",
+    title: "Order",
+    instruction: "Call or email us the details of your order"
+  },
+  {
+    image: "https://www.clipartmax.com/png/middle/310-3105814_daily-confirmation-confirmation-line-icon-icon.png",
+    title: "Confirmation",
+    instruction: "Give us up to 24 hours to confirm your order"
+  },
+  {
+    image: "https://cdn-icons-png.flaticon.com/512/124/124418.png",
+    title: "Pickup",
+    instruction: "Pick up your order at our location or request delivery"
+  }
+]
+
+
+
 
 const Catering = () => {
+  const navigate = useNavigate();
+
   return (
+    <>
     <div
       style={{
         display: "flex",
@@ -246,9 +275,107 @@ const Catering = () => {
         )
         )}
 
+      {/* ordering instructions */}
+      <div
+        style={{
+          backgroundColor: "#D9CAA0",
+          width: "80%",
+          margin: "0 auto",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          marginBottom: "5vw",
+          borderRadius: "3vw",
+          marginBottom: "8vw"
+        }}
+      >
 
-      {/* <Footer /> */}
+        <div style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "flex-start", 
+          justifyContent: "center",
+          paddingLeft: "6vw",
+          paddingRight: "6vw",
+          paddingTop: "3vw",
+          paddingBottom: "3vw",
+        }}>
+
+          <h1 style={{ fontSize: "4.5vw", textAlign: "center", width: "100%", marginTop: "0px" }}>
+            Ready to Order?
+          </h1>
+
+          {orderInstructions.map((item, index) => (
+            <div
+              key={index}
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                gap: "0.5vw",
+                margin: "1vw 0",
+                width: "100%", 
+              }}
+            >
+              <div
+                  style={{
+                    backgroundColor: "white",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "3vw",
+                    height: "3vw",
+                    borderRadius: "50%",
+                    overflow: "hidden", 
+                  }}
+                >
+                  <img
+                    src={item.image}
+                    style={{
+                      width: "80%",
+                      height: "80%",
+                      objectFit: "cover",
+                    }}
+                  />
+                </div>
+
+
+              <h2 style={{ margin: 0, fontSize:"2.7vw" }}>{item.title}</h2>
+              <p style={{ margin: 0 , fontSize:"2vw"}}> - {item.instruction}</p>
+            </div>
+          ))}
+
+          <div className="promotion-button-container" style={{width: "100%", display: "flex", justifyContent: "center", marginTop: "2vw", gap: "2vw",}}>
+              <button
+                style={{
+                  width: "13vw",
+                  height: "4vw",
+                }}
+                className="featured-item-button"
+                onClick={() => navigate("/menu")}
+              >
+                Menu{""}
+              </button>
+              <button
+                style={{
+                    width: "13vw",
+                    height: "4vw",
+                  }}
+                className="featured-item-button"
+                onClick={() => navigate("/locations")}
+              >
+                Locations{" "}
+              </button>
+            </div>
+        </div>
+
+        </div>
+
+         
     </div>
+      <Footer />
+    </>
+
   );
 };
 
