@@ -14,31 +14,37 @@ const About = () => {
       }}
     >
       <Navbar />
+
+       <div
+        style={{
+          position: "relative",
+          width: "100vw",
+          height: "70vh",
+          backgroundImage: 'url("https://cdn.homedit.com/wp-content/uploads/2019/05/A-Modern-Colombian-Coffee-Shop-2-1024x667.jpg")',
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          color: "#fff",
+          textAlign: "center",
+          padding: "0 5vw",
+          boxSizing: "border-box",
+          // Optional overlay for better text readability
+          backgroundBlendMode: "multiply",
+          backgroundColor: "rgba(0,0,0,0.4)",
+        }}
+      >
+        <h1 style={{ fontSize: "6vw", margin: "0 0 1vw 0", fontWeight: "700", color: "#D9CAA0" }}>
+          It starts with breakfast.
+        </h1>
+        <p style={{ fontSize: "1.3vw", maxWidth: "60%", lineHeight: 1.4, color: "rgb(249, 245, 235)", fontWeight: "500" }}>
+At Shaun’s Bagel Shop, we start your day with a smile and fresh breakfast favorites. From warm bagels to savory sandwiches, every bite is made to brighten your morning and fuel your day.        </p>
+      </div>
+
       
       <h1 style={{fontSize:"4.4vw", marginTop:"3vw"}}>About Us</h1>
-
-      {/* <div style={{ paddingTop: "4vw", paddingBottom: "4vw", paddingLeft: "2vw", paddingRight: "2vw", width: "85%", display: "flex", backgroundColor: "#D9CAA0", alignItems: "center"}}>
-        
-        <img
-          src={"https://cdnimg.webstaurantstore.com/uploads/blog/2019/5/interior-basics.jpg"}
-          style={{
-            width: "45%",
-            height: "40vw",
-            objectFit: "cover",
-            borderRadius: "2vw",
-          }}
-        />
-
-        <div style={{ height: "30vw", display: "flex", flexDirection: "column", justifyContent: "center", paddingLeft: "1.4vw", width: "55%",  marginLeft: "1vw", backgroundColor: "#f9f5eb", paddingTop:"0px"}}>
-          <h1 style={{width: "70%", fontSize: "3vw", marginBottom: "0px"}}>
-            The Breakfast You Imagined.
-          </h1>
-          <p style={{ width: "80%", fontSize: "1.6vw"}}>
-            Welcome to Shaun’s Bagel Shop — the world-renowned, multi-national breakfast empire that totally exists. You’ve probably heard of us in your dreams, because that’s where we started: in Shaun’s  imagination. But hey — just because it’s not real (yet) doesn’t mean it’s not made with love.
-          </p>
-        </div>
-
-      </div> */}
 
       <AboutContainer 
         image={"https://cdnimg.webstaurantstore.com/uploads/blog/2019/5/interior-basics.jpg"}
@@ -55,15 +61,114 @@ const About = () => {
       />
 
       <AboutContainer 
-        image={"https://cdn.vox-cdn.com/thumbor/wErcH2K1-mKOrfhP9yabCB6_3HE=/0x0:2040x1360/1200x800/filters:focal(857x517:1183x843)/cdn.vox-cdn.com/uploads/chorus_image/image/69137692/acastro_210120_1777_bagel_0002.0.jpg"}
+        image={"https://cdnimg.webstaurantstore.com/uploads/blog/2019/5/industrial.jpg"}
         title={"What Makes Us Special"}
         description={
-          "At Shaun’s Bagel Shop, we’re not just serving breakfast — we’re crafting a morning ritual. Our (hypothetically award-winning) bagels are built on a foundation of warmth, nostalgia, and a sincere dedication to carbs. Each flavor is designed to capture the comfort of a weekend morning, whether you’re grabbing a bite on the go or pretending you're not late for work. \n\nWhat sets us apart? We blend traditional techniques with modern sensibilities, and if that sounds like something we read off a competitor’s website — well, great artists steal. But seriously, while our ovens might still be metaphorical, the passion behind every bagel is very real. We’re here to elevate your breakfast expectations — even if we do it all from the comfort of a dream. Because let’s be honest: who says a restaurant has to exist to be your favorite?"
-        }
+        "At Shaun’s Bagel Shop, we believe breakfast should be warm, welcoming, and a little nostalgic. Our bagels are crafted with care, inspired by the kind of cozy neighborhood spot we’ve always imagined — where the coffee’s strong, the carbs are golden, and everyone feels at home. While we don’t have a storefront just yet, every detail is built with genuine passion and a love for the little things that make mornings better."}
         isLeft={true}
       />
       
+      <div style={{ 
+        marginBottom: "200px", 
+        padding: "4vw 2vw", 
+        width: "85%", 
+        backgroundColor: "#D9CAA0", 
+        fontFamily: "sans-serif",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center"
+      }}>
+        <h1 style={{ fontSize: "3vw", textAlign: "center", marginBottom: "2vw" , marginTop: "0px"}}>
+          What People Are Saying.
+        </h1>
+
+        <div style={{ 
+          display: "flex", 
+          flexDirection: "row", 
+          alignItems: "stretch", 
+          gap: "2vw", 
+          width: "100%",
+          alignItems: "center",
+        }}>
+          <img 
+            src="https://cdnimg.webstaurantstore.com/uploads/blog/2019/5/interior-basics.jpg" 
+            alt="Shop Interior"
+            style={{ 
+              width: "45%", 
+              height: "50vw", 
+              objectFit: "cover", 
+              borderRadius: "1.5vw" 
+            }}
+          />
+
+          <div style={{ 
+            width: "55%", 
+            display: "flex", 
+            flexDirection: "column", 
+            justifyContent: "space-between",
+            height: "40vw"
+          }}>
+            {/* Quote 1 - Left Aligned */}
+            <div style={{ 
+              backgroundColor: "#f9f5eb", 
+              borderRadius: "1.5vw", 
+              padding: "2vw", 
+              fontSize: "1.6vw", 
+              textAlign: "left",
+              width: "70%"
+            }}>
+              <blockquote style={{ fontStyle: "italic", margin: 0 }}>
+                “Every bite was like a warm hug from someone I owe money to. Strange, but comforting.”
+              </blockquote>
+              <div style={{ marginTop: "0.8vw", textAlign: "right", fontWeight: "bold" }}>
+                – S’Han Thompkins
+              </div>
+            </div>
+
+            {/* Quote 2 - Right Aligned */}
+            <div style={{ 
+              backgroundColor: "#f9f5eb", 
+              borderRadius: "1.5vw", 
+              padding: "2vw", 
+              fontSize: "1.6vw", 
+              textAlign: "right",
+              alignSelf: "flex-end",
+              width: "70%"
+
+            }}>
+              <blockquote style={{ fontStyle: "italic", margin: 0 }}>
+                “I showed up to Shaun’s Bagel Shop. There was no building. Just vibes. Still five stars.”
+              </blockquote>
+              <div style={{ marginTop: "0.8vw", textAlign: "right", fontWeight: "bold" }}>
+                – Shéaun Thomasi
+              </div>
+            </div>
+
+            {/* Quote 3 - Left Aligned */}
+            <div style={{ 
+              backgroundColor: "#f9f5eb", 
+              borderRadius: "1.5vw", 
+              padding: "2vw", 
+              fontSize: "1.6vw", 
+              textAlign: "left",
+              width: "70%"
+            }}>
+              <blockquote style={{ fontStyle: "italic", margin: 0 }}>
+                “I tried to recreate the bagel at home. I failed. Twice. I respect the art now.”
+              </blockquote>
+              <div style={{ marginTop: "0.8vw", textAlign: "right", fontWeight: "bold" }}>
+                – Shaúhn Thomassen
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
     </div>
+    <Footer />
   </>  
       );
 }

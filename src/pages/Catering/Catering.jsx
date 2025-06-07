@@ -178,13 +178,12 @@ const Catering = () => {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            color: "black",
             fontSize: "6vw",
-            // fontWeight: "bold",
             fontFamily: "Arial, sans-serif",
             width: "90%",
             textShadow: "2px 2px 6px rgba(0,0,0,0.7)",
             textAlign: "center",
+            color: "#D9CAA0"
           }}
         >
           We Bring the Breakfast to You!
