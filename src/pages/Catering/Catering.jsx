@@ -190,9 +190,9 @@ const Catering = () => {
       </div>
 
 
-      <div style={{ width: "100%", textAlign: "center", marginBottom: "0.6vw" }}>
+      {/* <div style={{ width: "100%", textAlign: "center", marginBottom: "0.6vw" }}>
         <h1 style={{ fontSize: "2.8vw", margin: 0 }}>Perfect for any morning!</h1>
-      </div>
+      </div> */}
 
       <div className="catering-icons-container">
         {iconData.map((item, idx) => (
