@@ -44,7 +44,7 @@ At Shaun’s Bagel Shop, we start your day with a smile and fresh breakfast favo
       </div>
 
       
-      <h1 style={{fontSize:"4.4vw", marginTop:"3vw", marginBottom: "6vw"}}>About Us</h1>
+      <h1 style={{fontSize:"4.4vw", marginTop:"3vw", marginBottom: "4vw"}}>About Us</h1>
 
       <AboutContainer 
         image={"https://cdnimg.webstaurantstore.com/uploads/blog/2019/5/interior-basics.jpg"}
