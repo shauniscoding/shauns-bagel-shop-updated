@@ -19,16 +19,18 @@
 
 .scroll-indicator {
   position: absolute;
-  bottom: 20px; /* distance from bottom */
+  bottom: 20px; 
   left: 50%;
   transform: translateX(-50%);
-  color: white; /* visible on video */
-  font-size: 1.2rem;
-  font-weight: bold;
-  z-index: 10; /* above video */
+  height: 70px;
+  width: 70px;
+  filter: brightness(0) invert(1); 
+  z-index: 10; 
   user-select: none;
   cursor: default;
 }
+
+
 
 .featured-item {
   display: flex;
@@ -37,7 +39,7 @@
   border-radius: 5vw;
   position: relative;
   margin-top: 7vw;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.1s ease;
 }
 .featured-item:hover {
   background-color: #d9caa0;
@@ -62,4 +64,68 @@
   background: #e0dacb;
   color: #000;
   transform: scale(1.05);
+}
+
+.overlay-dark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+}
+
+.splash-text-container {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -40%);
+  text-align: center;
+  width: 75%;
+  padding: 0 1rem;
+  pointer-events: none;
+}
+
+@keyframes fadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.splash-text-container h1 {
+  font-size: 7.6vw;
+  margin: 0 0 0.6rem 0;
+  color: rgb(249, 245, 235);
+  font-weight: 600;
+  line-height: 1.1;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+  pointer-events: auto;
+
+  /* Animation */
+  opacity: 0;
+  animation: fadeSlideUp 1s ease forwards;
+  animation-delay: 0s;
+}
+
+.splash-text-container p {
+  font-size: 2vw;
+  max-width: 70%;
+  line-height: 1.4;
+  color: rgb(249, 245, 235);
+  font-weight: 400;
+  margin: 0 auto;
+  letter-spacing: 0.02em;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+  pointer-events: auto;
+
+  /* Animation */
+  opacity: 0;
+  animation: fadeSlideUp 1s ease forwards;
+  animation-delay: 0.7s; 
 }

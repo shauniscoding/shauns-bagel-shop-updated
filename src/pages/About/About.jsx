@@ -84,7 +84,9 @@ At Shaun’s Bagel Shop, we start your day with a smile and fresh breakfast favo
           backgroundColor: "#D9CAA0", 
           padding: "2vw", 
           boxSizing: "border-box", 
-          height: "34vw"
+          height: "34vw",
+          borderTopLeftRadius: "1.5vw", borderBottomLeftRadius: "1.5vw"
+
         }}>
           <h1 style={{ 
             width: "100%", 
