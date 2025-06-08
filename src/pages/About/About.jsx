@@ -44,7 +44,7 @@ At Shaun’s Bagel Shop, we start your day with a smile and fresh breakfast favo
       </div>
 
       
-      <h1 style={{fontSize:"4.4vw", marginTop:"3vw"}}>About Us</h1>
+      <h1 style={{fontSize:"4.4vw", marginTop:"3vw", marginBottom: "0px"}}>About Us</h1>
 
       <AboutContainer 
         image={"https://cdnimg.webstaurantstore.com/uploads/blog/2019/5/interior-basics.jpg"}
@@ -56,7 +56,7 @@ At Shaun’s Bagel Shop, we start your day with a smile and fresh breakfast favo
       <AboutContainer 
         image={"https://fruitbasket.limepack.com/blog/wp-content/uploads/2024/01/Coffee-Interior.jpg"}
         title={"Our Story"}
-        description={"Shaun’s Bagel Shop was founded on a simple belief: breakfast should never be boring. Also, donuts are the highest form of art, and bagels are proof that circles can bring happiness. The story began in a tiny apartment kitchen with one toaster, a dozen bagels, and a dangerous amount of enthusiasm for cream cheese. There were no investors, no franchise dreams — just Shaun, a spatula, and a lifelong passion for perfectly golden carbs."}
+        description={"Shaun’s Bagel Shop started with one toaster, a dozen bagels, and a big love for breakfast. There were no investors, no big plans — just Shaun, a spatula, and a deep passion for golden carbs. We believe breakfast should never be boring, and that bagels and donuts prove one thing: circles make people happy."}
         isLeft={false}
       />
 
@@ -64,105 +64,109 @@ At Shaun’s Bagel Shop, we start your day with a smile and fresh breakfast favo
         image={"https://cdnimg.webstaurantstore.com/uploads/blog/2019/5/industrial.jpg"}
         title={"What Makes Us Special"}
         description={
-        "At Shaun’s Bagel Shop, we believe breakfast should be warm, welcoming, and a little nostalgic. Our bagels are crafted with care, inspired by the kind of cozy neighborhood spot we’ve always imagined — where the coffee’s strong, the carbs are golden, and everyone feels at home. While we don’t have a storefront just yet, every detail is built with genuine passion and a love for the little things that make mornings better."}
+        "At Shaun’s Bagel Shop, we believe breakfast should be warm, nostalgic, and full of care. Our bagels are made with passion and inspired by the cozy neighborhood spot we dream of — where the coffee’s strong, the carbs are golden, and everyone feels at home."}
         isLeft={true}
       />
       
       <div style={{ 
-        marginBottom: "200px", 
-        padding: "4vw 2vw", 
-        width: "85%", 
-        backgroundColor: "#D9CAA0", 
-        fontFamily: "sans-serif",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center"
-      }}>
-        <h1 style={{ fontSize: "3vw", textAlign: "center", marginBottom: "2vw" , marginTop: "0px"}}>
-          What People Are Saying.
-        </h1>
-
-        <div style={{ 
           display: "flex", 
           flexDirection: "row", 
-          alignItems: "stretch", 
-          gap: "2vw", 
-          width: "100%",
-          alignItems: "center",
+          alignItems: "center", 
+          width: "85%",
+          marginBottom: "4vw",
         }}>
+          {/* Quotes - Now on the Left */}
+        <div style={{ 
+          width: "100%", 
+          display: "flex", 
+          flexDirection: "column", 
+          justifyContent: "center",
+          backgroundColor: "#D9CAA0", 
+          padding: "2vw", 
+          boxSizing: "border-box", 
+          height: "34vw"
+        }}>
+          <h1 style={{ 
+            width: "100%", 
+            fontSize: "2.6vw", 
+            marginBottom: "1.5vw", 
+            textAlign: "center" 
+          }}>
+            What People Are Saying
+          </h1>
+
+          {/* Quote 1 - Left Aligned */}
+          <div style={{ 
+            width: "60%", 
+            alignSelf: "flex-start", 
+            // backgroundColor: "white", 
+            borderRadius: "1vw", 
+            fontSize: "1.6vw", 
+            textAlign: "left",
+            margin: 0
+          }}>
+            <blockquote style={{ fontStyle: "italic", margin: 0 }}>
+              “Every bite was like a warm hug from someone I owe money to. Strange, but comforting.”
+            </blockquote>
+            <div style={{ marginTop: "0.6vw", textAlign: "right", fontWeight: "bold" }}>
+              – S’Han Thompkins
+            </div>
+          </div>
+
+          {/* Quote 2 - Right Aligned */}
+          <div style={{ 
+            width: "60%", 
+            alignSelf: "flex-end", 
+            // backgroundColor: "white", 
+            borderRadius: "1vw", 
+            fontSize: "1.6vw", 
+            textAlign: "right",
+            marginTop: "2vw", 
+          }}>
+            <blockquote style={{ fontStyle: "italic", margin: 0 }}>
+              “I showed up to Shaun’s Bagel Shop. There was no building. Just vibes. Still five stars.”
+            </blockquote>
+            <div style={{ marginTop: "0.6vw", fontWeight: "bold" }}>
+              – Shéaun Thomasi
+            </div>
+          </div>
+
+          {/* Quote 3 - Left Aligned */}
+          <div style={{ 
+            width: "60%", 
+            alignSelf: "flex-start", 
+            // backgroundColor: "white", 
+            borderRadius: "1vw", 
+            fontSize: "1.6vw", 
+            textAlign: "left",
+            marginBottom: "1vw" 
+          }}>
+            <blockquote style={{ fontStyle: "italic", margin: 0 }}>
+              “I tried to recreate the bagel at home. I failed. Twice. I respect the art now.”
+            </blockquote>
+            <div style={{ marginTop: "0.6vw", textAlign: "right", fontWeight: "bold" }}>
+              – Shaúhn Thomassen
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+          {/* Image - Now on the Right */}
           <img 
             src="https://cdnimg.webstaurantstore.com/uploads/blog/2019/5/interior-basics.jpg" 
             alt="Shop Interior"
             style={{ 
               width: "45%", 
-              height: "50vw", 
+              height: "40vw", 
               objectFit: "cover", 
               borderRadius: "1.5vw" 
             }}
           />
-
-          <div style={{ 
-            width: "55%", 
-            display: "flex", 
-            flexDirection: "column", 
-            justifyContent: "space-between",
-            height: "40vw"
-          }}>
-            {/* Quote 1 - Left Aligned */}
-            <div style={{ 
-              backgroundColor: "#f9f5eb", 
-              borderRadius: "1.5vw", 
-              padding: "2vw", 
-              fontSize: "1.6vw", 
-              textAlign: "left",
-              width: "70%"
-            }}>
-              <blockquote style={{ fontStyle: "italic", margin: 0 }}>
-                “Every bite was like a warm hug from someone I owe money to. Strange, but comforting.”
-              </blockquote>
-              <div style={{ marginTop: "0.8vw", textAlign: "right", fontWeight: "bold" }}>
-                – S’Han Thompkins
-              </div>
-            </div>
-
-            {/* Quote 2 - Right Aligned */}
-            <div style={{ 
-              backgroundColor: "#f9f5eb", 
-              borderRadius: "1.5vw", 
-              padding: "2vw", 
-              fontSize: "1.6vw", 
-              textAlign: "right",
-              alignSelf: "flex-end",
-              width: "70%"
-
-            }}>
-              <blockquote style={{ fontStyle: "italic", margin: 0 }}>
-                “I showed up to Shaun’s Bagel Shop. There was no building. Just vibes. Still five stars.”
-              </blockquote>
-              <div style={{ marginTop: "0.8vw", textAlign: "right", fontWeight: "bold" }}>
-                – Shéaun Thomasi
-              </div>
-            </div>
-
-            {/* Quote 3 - Left Aligned */}
-            <div style={{ 
-              backgroundColor: "#f9f5eb", 
-              borderRadius: "1.5vw", 
-              padding: "2vw", 
-              fontSize: "1.6vw", 
-              textAlign: "left",
-              width: "70%"
-            }}>
-              <blockquote style={{ fontStyle: "italic", margin: 0 }}>
-                “I tried to recreate the bagel at home. I failed. Twice. I respect the art now.”
-              </blockquote>
-              <div style={{ marginTop: "0.8vw", textAlign: "right", fontWeight: "bold" }}>
-                – Shaúhn Thomassen
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
+
 
 
 
