@@ -41,7 +41,7 @@ const Home = () => {
         Shaun's Bagel Shop
       </h1>
       <p>
-        Fresh mornings start here.
+        Fresh mornings start here
       </p>
     </div>
 
