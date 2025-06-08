@@ -6,3 +6,160 @@
     align-items: center;     /* centers vertically */
 }
 
+.catering-icons-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1vw;
+  align-items: center;
+  justify-items: center;
+}
+
+.catering-icon-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 20vw;
+  margin-top: 0px;
+}
+
+.catering-icon-circle {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.catering-icon-image {
+  width: 50%;
+  height: 50%;
+  object-fit: cover;
+}
+
+.catering-icon-description {
+  font-size: 1.7vw;
+  margin: 0;
+}
+
+.order-instructions-wrapper {
+  background-color: #D9CAA0;
+  width: 80%;
+  margin: 0 auto 8vw auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 3vw;
+}
+
+.order-instructions-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 3vw 6vw;
+}
+
+.order-instructions-title {
+  font-size: 4.5vw;
+  text-align: center;
+  width: 100%;
+  margin-top: 0px;
+}
+
+.order-step {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5vw;
+  margin: 1vw 0;
+  width: 100%;
+}
+
+.order-step-icon {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3vw;
+  height: 3vw;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.order-step-image {
+  width: 80%;
+  height: 80%;
+  object-fit: cover;
+}
+
+.order-step-title {
+  margin: 0;
+  font-size: 2.7vw;
+}
+
+.order-step-text {
+  margin: 0;
+  font-size: 2vw;
+}
+
+.package-container {
+  display: flex;
+  background-color: #d9caa0;
+  width: 70vw;
+  border-radius: 5vw;
+  position: relative;
+  justify-content: flex-end;
+  margin-bottom: 13vw;
+}
+
+.package-image {
+  position: absolute;
+  width: 29vw;
+  height: 29vw;
+  top: -3vw;
+  border-radius: 5vw;
+  z-index: 2;
+}
+
+.package-info {
+  width: 32vw;
+  margin-right: 7vw;
+  padding-left: 2vw;
+  padding-right: 2vw;
+  padding-bottom: 5vw;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.package-title {
+  font-size: 3.7vw;
+  margin-bottom: 0px;
+  font-family: "amiko";
+  line-height: 1.1;
+}
+
+.package-description {
+  margin-top: 0.2vw;
+  font-size: 1.7vw;
+  font-family: "amiko";
+  text-align: left;
+  margin-bottom: 3vw;
+}
+
+.package-list {
+  margin: 0;
+  padding-left: 1.2vw;
+  list-style-position: outside;
+  font-size: 1.7vw;
+  font-family: "amiko";
+}
+

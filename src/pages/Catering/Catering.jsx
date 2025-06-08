@@ -13,6 +13,7 @@ import donutDisturb from "/images/donutDisturb.webp";
 import bagelBar from "/images/bagelBar.jpg"
 import lightStart from "/images/lightStart.jpg";
 import { useNavigate } from "react-router-dom";
+import "./Catering.css";
 
 
 const iconData = [
@@ -193,67 +194,21 @@ const Catering = () => {
         <h1 style={{ fontSize: "2.8vw", margin: 0 }}>Perfect for any morning!</h1>
       </div>
 
-      <div
-        className="catering-icons-container"
-        style={{
-          width: "100%",
-          display: "grid",
-          gridTemplateColumns: `repeat(auto-fit, minmax(150px, 1fr))`,
-          gap: "1vw",
-          alignItems: "center",
-          justifyItems: "center",
-        }}
-      >
+      <div className="catering-icons-container">
         {iconData.map((item, idx) => (
-          <div
-            key={idx}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              textAlign: "center",
-              maxWidth: "20vw",
-                        marginTop:"0px"
-
-            }}
-          >
-            <div
-              style={{
-                width: "110px",
-                height: "110px",
-                borderRadius: "50%",
-                overflow: "hidden",
-                border: "3px solid #fff",
-                boxShadow: "0 4px 12px rgba(0,0,0,0.25)",
-                backgroundColor: "white",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                marginBottom: "8px",
-              }}
-            >
+          <div className="catering-icon-wrapper" key={idx}>
+            <div className="catering-icon-circle">
               <img
                 src={item.image}
                 alt={`icon-${idx}`}
-                style={{
-                  width: "50%",
-                  height: "50%",
-                  objectFit: "cover",
-                }}
+                className="catering-icon-image"
               />
             </div>
-
-            <h2
-              style={{
-                fontSize: "1.7vw",
-                margin: 0,
-              }}
-            >
-              {item.description}
-            </h2>
+            <h2 className="catering-icon-description">{item.description}</h2>
           </div>
         ))}
       </div>
+
 
         <h1 style={{fontSize: "6vw", fontFamily: "Arial, sans-serif", marginTop: "10vw", textAlign: "center"}}>
           Our Packages
@@ -273,100 +228,26 @@ const Catering = () => {
         )}
 
       {/* ordering instructions */}
-      <div
-        style={{
-          backgroundColor: "#D9CAA0",
-          width: "80%",
-          margin: "0 auto",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          marginBottom: "5vw",
-          borderRadius: "3vw",
-          marginBottom: "8vw"
-        }}
-      >
-
-        <div style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "flex-start", 
-          justifyContent: "center",
-          paddingLeft: "6vw",
-          paddingRight: "6vw",
-          paddingTop: "3vw",
-          paddingBottom: "3vw",
-        }}>
-
-          <h1 style={{ fontSize: "4.5vw", textAlign: "center", width: "100%", marginTop: "0px" }}>
-            Ready to Order?
-          </h1>
+      <div className="order-instructions-wrapper">
+        <div className="order-instructions-inner">
+          <h1 className="order-instructions-title">Ready to Order?</h1>
 
           {orderInstructions.map((item, index) => (
-            <div
-              key={index}
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                gap: "0.5vw",
-                margin: "1vw 0",
-                width: "100%", 
-              }}
-            >
-              <div
-                  style={{
-                    backgroundColor: "white",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "3vw",
-                    height: "3vw",
-                    borderRadius: "50%",
-                    overflow: "hidden", 
-                  }}
-                >
-                  <img
-                    src={item.image}
-                    style={{
-                      width: "80%",
-                      height: "80%",
-                      objectFit: "cover",
-                    }}
-                  />
-                </div>
-
-
-              <h2 style={{ margin: 0, fontSize:"2.7vw" }}>{item.title}</h2>
-              <p style={{ margin: 0 , fontSize:"2vw"}}> - {item.instruction}</p>
+            <div className="order-step" key={index}>
+              <div className="order-step-icon">
+                <img
+                  src={item.image}
+                  alt={`step-${index}`}
+                  className="order-step-image"
+                />
+              </div>
+              <h2 className="order-step-title">{item.title}</h2>
+              <p className="order-step-text">- {item.instruction}</p>
             </div>
           ))}
-
-          <div className="promotion-button-container" style={{width: "100%", display: "flex", justifyContent: "center", marginTop: "2vw", gap: "2vw",}}>
-              <button
-                style={{
-                  width: "13vw",
-                  height: "4vw",
-                }}
-                className="featured-item-button"
-                onClick={() => navigate("/menu")}
-              >
-                Menu{""}
-              </button>
-              <button
-                style={{
-                    width: "13vw",
-                    height: "4vw",
-                  }}
-                className="featured-item-button"
-                onClick={() => navigate("/locations")}
-              >
-                Locations{" "}
-              </button>
-            </div>
         </div>
+      </div>
 
-        </div>
 
          
     </div>

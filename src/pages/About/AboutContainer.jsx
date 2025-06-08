@@ -30,7 +30,7 @@ const AboutContainer = ({image, title, description, isLeft}) => {
         return (    
         <div style={{ marginBottom: "3vw", paddingBottom: "4vw", paddingLeft: "2vw", paddingRight: "2vw", width: "85%", display: "flex",  alignItems: "center"}}>   
             
-            <div style={{ height: "30vw", display: "flex", flexDirection: "column", justifyContent: "center", paddingRight: "1.4vw", width: "55%", backgroundColor: "#D9CAA0", paddingTop:"0px", alignSelf: "center", borderTopLeftRadius: "1.5vw", borderBottomLefttRadius: "1.5vw"}}>
+            <div style={{ height: "30vw", display: "flex", flexDirection: "column", justifyContent: "center", paddingRight: "1.4vw", width: "55%", backgroundColor: "#D9CAA0", paddingTop:"0px", alignSelf: "center", borderTopLeftRadius: "1.5vw", borderBottomLeftRadius: "1.5vw"}}>
             <h1 style={{width: "70%", fontSize: "3vw", marginBottom: "0px", textAlign: "right" }}>
                 {title}
             </h1>
