@@ -160,34 +160,32 @@ const Catering = () => {
     >
       <Navbar />
 
-      <div className="catering-splash-screen" style={{ position: "relative" }}>
-        <img
-          src={buffet}
-          alt="Buffet"
-          style={{
-            width: "100vw",
-            height: "70vh",
-            objectFit: "cover",
-            display: "block",
-          }}
-        />
-
-        <div
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            fontSize: "6vw",
-            fontFamily: "Arial, sans-serif",
-            width: "90%",
-            textShadow: "2px 2px 6px rgba(0,0,0,0.7)",
-            textAlign: "center",
-            color: "#D9CAA0"
-          }}
-        >
+      <div
+        style={{
+          position: "relative",
+          width: "100vw",
+          height: "70vh",
+          backgroundImage: 'url("https://www.mashed.com/img/gallery/the-truth-about-hotel-breakfast-buffets/intro-1609346085.jpg")',
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          color: "#fff",
+          textAlign: "center",
+          padding: "0 5vw",
+          boxSizing: "border-box",
+          // Optional overlay for better text readability
+          backgroundBlendMode: "multiply",
+          backgroundColor: "rgba(0,0,0,0.4)",
+        }}
+      >
+        <h1 style={{ fontSize: "6vw", margin: "0 0 1vw 0", fontWeight: "700", color: "#D9CAA0" }}>
           We Bring the Breakfast to You!
-        </div>
+        </h1>
+        <p style={{ fontSize: "1.3vw", maxWidth: "60%", lineHeight: 1.4, color: "rgb(249, 245, 235)", fontWeight: "500" }}>
+        Get fresh breakfast delivered with customizable catering packages. Choose from bagels, sandwiches, and more — perfect for meetings, events, or any group that loves a great start to the day. </p>
       </div>
 
 

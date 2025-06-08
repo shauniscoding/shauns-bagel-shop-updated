@@ -44,7 +44,7 @@ At Shaun’s Bagel Shop, we start your day with a smile and fresh breakfast favo
       </div>
 
       
-      <h1 style={{fontSize:"4.4vw", marginTop:"3vw", marginBottom: "0px"}}>About Us</h1>
+      <h1 style={{fontSize:"4.4vw", marginTop:"3vw", marginBottom: "6vw"}}>About Us</h1>
 
       <AboutContainer 
         image={"https://cdnimg.webstaurantstore.com/uploads/blog/2019/5/interior-basics.jpg"}
@@ -73,7 +73,7 @@ At Shaun’s Bagel Shop, we start your day with a smile and fresh breakfast favo
           flexDirection: "row", 
           alignItems: "center", 
           width: "85%",
-          marginBottom: "4vw",
+          marginBottom: "6vw",
         }}>
           {/* Quotes - Now on the Left */}
         <div style={{ 
@@ -103,7 +103,8 @@ At Shaun’s Bagel Shop, we start your day with a smile and fresh breakfast favo
             borderRadius: "1vw", 
             fontSize: "1.6vw", 
             textAlign: "left",
-            margin: 0
+            margin: 0,
+            marginLeft: "1.5vw"
           }}>
             <blockquote style={{ fontStyle: "italic", margin: 0 }}>
               “Every bite was like a warm hug from someone I owe money to. Strange, but comforting.”
@@ -139,7 +140,8 @@ At Shaun’s Bagel Shop, we start your day with a smile and fresh breakfast favo
             borderRadius: "1vw", 
             fontSize: "1.6vw", 
             textAlign: "left",
-            marginBottom: "1vw" 
+            marginBottom: "1vw" ,
+            marginLeft: "1.5vw"
           }}>
             <blockquote style={{ fontStyle: "italic", margin: 0 }}>
               “I tried to recreate the bagel at home. I failed. Twice. I respect the art now.”
