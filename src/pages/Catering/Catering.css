@@ -119,20 +119,21 @@
   position: relative;
   justify-content: flex-end;
   margin-bottom: 13vw;
+  min-height: 55vw;
 }
 
 .package-image {
   position: absolute;
-  width: 29vw;
-  height: 29vw;
-  top: -3vw;
+  width: 37vw;
+  height: 37vw;
   border-radius: 5vw;
   z-index: 2;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .package-info {
-  width: 32vw;
-  margin-right: 7vw;
+  width: 38vw;
   padding-left: 2vw;
   padding-right: 2vw;
   padding-bottom: 5vw;
@@ -142,7 +143,7 @@
 }
 
 .package-title {
-  font-size: 3.7vw;
+  font-size: 5vw;
   margin-bottom: 0px;
   font-family: "amiko";
   line-height: 1.1;
@@ -150,17 +151,26 @@
 
 .package-description {
   margin-top: 0.2vw;
-  font-size: 1.7vw;
+  font-size: 2vw;
   font-family: "amiko";
   text-align: left;
   margin-bottom: 3vw;
+  font-weight: bold;
 }
 
 .package-list {
   margin: 0;
-  padding-left: 1.2vw;
   list-style-position: outside;
-  font-size: 1.7vw;
+  font-size: 1.9vw;
   font-family: "amiko";
+  list-style: none;
+  padding-left: 0;
+  font-weight: 500;
+  margin-bottom: 3vw;
+
 }
 
+.package-list li::before {
+  content: "-";
+  margin-right: 0.5em;
+}

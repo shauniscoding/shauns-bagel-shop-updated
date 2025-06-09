@@ -46,12 +46,12 @@ const cateringPackages = [
     price: "$89.99",
     image: morningMixer, 
     details: [
-      "-Assorted fresh-baked bagels (12)",
-      "-Choice of 3 cream cheeses (plain, veggie, cinnamon swirl)",
-      "-Mini muffin tray (12)",
-      "-Coffee traveler (serves 10)",
-      "-Utensils, napkins, and cups included",
-      "-Serves: 8-10 people"
+      "12 assorted fresh-baked bagels",
+      "Choice of 3 cream cheeses: plain, veggie, cinnamon swirl",
+      "Tray of 12 mini muffins",
+      "Coffee traveler that serves 10",
+      "Utensils, napkins, and cups included",
+      "Serves: 8–10 people"
     ],
     isLeft: true,
   },
@@ -62,11 +62,11 @@ const cateringPackages = [
     price: "$149.99",
     image: breakfastBoss, 
     details: [
-      "-10 hot breakfast sandwiches (egg, cheese, meat or veggie options)",
-      "-Bagel platter (8 assorted)",
-      "-Fruit salad bowl",
-      "-Two coffee travelers OR juice carafes",
-      "-Serves: 10–12 people",
+      "10 hot breakfast sandwiches with egg, cheese, and meat or veggie options",
+      "Bagel platter with 8 assorted varieties",
+      "Fresh fruit salad bowl",
+      "Two coffee travelers or juice carafes",
+      "Serves: 10–12 people"
     ],
     isLeft: false,
   },
@@ -77,11 +77,11 @@ const cateringPackages = [
     price: "$99.99",
     image: donutDisturb, 
     details: [
-      "-Assorted donuts & pastries (18 pcs)",
-      "-Cinnamon rolls (6 large)",
-      "-Glazed donut holes tray",
-      "-1 gallon cold brew coffee",
-      "-Serves: 10–14 people",
+      "18 assorted donuts and pastries",
+      "6 large cinnamon rolls",
+      "Tray of glazed donut holes",
+      "1 gallon of cold brew coffee",
+      "Serves: 10–14 people"
     ],
     isLeft: true,
   },
@@ -92,12 +92,12 @@ const cateringPackages = [
     price: "$179.99",
     image: bagelBar, 
     details: [
-      "-Assorted sliced bagels (18 halves)",
-      "-Cream cheese trio, butter, jam",
-      "-Scrambled eggs, breakfast sausage & bacon on the side",
-      "-Fresh fruit tray",
-      "-Orange juice & water bottles",
-      "-Serves: 12–15 people",
+      "18 bagel halves, sliced and ready to build",
+      "Trio of cream cheese, butter, and jam",
+      "Side of scrambled eggs, sausage, and bacon",
+      "Fresh fruit tray for sharing",
+      "Orange juice and bottled water included",
+      "Serves: 12–15 people"
     ],
     isLeft: false,
   },
@@ -108,17 +108,16 @@ const cateringPackages = [
     price: "$59.99",
     image: lightStart, 
     details: [
-      "-Mini bagels (12)",
-      "-Mixed fruit cups (12)",
-      "-Muffins (6)",
-      "-Orange juice (1L)",
-      "-Serves: 6-8 people",
+      "12 mini bagels for easy sharing",
+      "12 mixed fruit cups",
+      "6 fresh-baked muffins",
+      "1 liter of orange juice",
+      "Serves: 6–8 people"
     ],
     isLeft: true,
   },
-
-
 ]
+
 
 const orderInstructions = [
   {
