@@ -69,10 +69,12 @@
 }
 
 .order-instructions-title {
-  font-size: 4.5vw;
+  font-size: 4.7vw;
   text-align: center;
   width: 100%;
   margin-top: 0px;
+  margin-bottom: 0.2vw;
+
 }
 
 .order-step {
@@ -109,6 +111,7 @@
 .order-step-text {
   margin: 0;
   font-size: 2vw;
+  font-weight: bold;
 }
 
 .package-container {
@@ -118,7 +121,7 @@
   border-radius: 5vw;
   position: relative;
   justify-content: flex-end;
-  margin-bottom: 13vw;
+  margin-bottom: 9vw;
   min-height: 55vw;
 }
 
@@ -173,4 +176,32 @@
 .package-list li::before {
   content: "-";
   margin-right: 0.5em;
+}
+
+.catering-event-list {
+  list-style: none;
+  padding: 0;
+  margin-left: 2vw;
+  display: flex;
+  flex-direction: column;
+  gap: 1vw;
+}
+
+.catering-event-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.8vw;
+  font-size: 1.8vw; /* slightly smaller than before */
+  font-weight: 600;
+  font-family: "amiko", sans-serif;
+}
+
+.catering-event-list li img {
+  width: 2.2vw;
+  height: 2.2vw;
+  object-fit: cover;
+  border-radius: 50%;
+  background-color: white;
+  padding: 0.2vw;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }

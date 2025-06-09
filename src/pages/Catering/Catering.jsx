@@ -12,32 +12,33 @@ import breakfastBoss from "/images/breakfastBoss.jpg"
 import donutDisturb from "/images/donutDisturb.webp";
 import bagelBar from "/images/bagelBar.jpg"
 import lightStart from "/images/lightStart.jpg";
+import approved from "/images/approved.png";
 import { useNavigate } from "react-router-dom";
 import "./Catering.css";
 
 
-const iconData = [
-  {
-    image: bread,
-    description: "Food made Fresh",
-  },
-  {
-    image: delivery,
-    description: "Fast Delivery",
-  },
-  {
-    image: people,
-    description: "Packages for Everyone",
-  },
-  {
-    image: deal,
-    description: "Fantastic Deals",
-  },
-  {
-    image: event,
-    description: "Perfect for any event",
-  },
-];
+  const iconData = [
+    {
+      image: bread,
+      description: "Food made Fresh",
+    },
+    {
+      image: delivery,
+      description: "Fast Delivery",
+    },
+    {
+      image: people,
+      description: "Packages for Everyone",
+    },
+    {
+      image: deal,
+      description: "Fantastic Deals",
+    },
+    {
+      image: approved,
+      description: "Customer Approved",
+    },
+  ];
 
 const cateringPackages = [ 
   {
@@ -118,7 +119,6 @@ const cateringPackages = [
   },
 ]
 
-
 const orderInstructions = [
   {
     image: "https://static.thenounproject.com/png/1633691-200.png",
@@ -142,8 +142,40 @@ const orderInstructions = [
   }
 ]
 
-
-
+const cateringEvents = [
+  {
+    title: "Corporate Breakfasts",
+    image: "https://static.thenounproject.com/png/3483587-200.png",
+  },
+  {
+    title: "Birthday Parties",
+    image: "https://www.freeiconspng.com/uploads/birthday-icon-9.png",
+  },
+  {
+    title: "Weddings & Showers",
+    image: "https://png.pngtree.com/png-vector/20221109/ourmid/pngtree-engangement-white-bridal-icon-vector-png-image_40963812.jpg",
+  },
+  {
+    title: "School Events",
+    image: "https://media.istockphoto.com/id/1043158368/vector/school-building-icon-in-flat-style-college-education-vector-illustration-on-white-isolated.jpg?s=612x612&w=0&k=20&c=qpk4m_v0vJvEJfFehgS8-A61xvHhFurjkmx2AteovV0=",
+  },
+  {
+    title: "Family Gatherings",
+    image: "https://www.freeiconspng.com/thumbs/family-icon/family-icon-14.jpg",
+  },
+  {
+    title: "Brunches",
+    image: "https://www.svgrepo.com/show/99050/breakfast.svg",
+  },
+  {
+    title: "Team Meetings",
+    image: "https://static.vecteezy.com/system/resources/thumbnails/000/550/535/small_2x/user_icon_007.jpg",
+  },
+  {
+    title: "Holiday Parties",
+    image: "https://media.istockphoto.com/id/1269160375/vector/beach-sunbed-vacation-icon-glyph-black-vector-on-isolated-white-background.jpg?s=612x612&w=0&k=20&c=UMyUzMj1p4QPaSShLhW3xQB16zQXpnWt0irRG8zt0Ps=",
+  },
+];
 
 const Catering = () => {
   const navigate = useNavigate();
@@ -226,6 +258,32 @@ const Catering = () => {
         )
         )}
 
+        <div style={{display: "flex", justifyContent: "flex-end"}}>
+          <div className="package-container">
+            <div>
+              <img src={"https://abovecatering.com/wp-content/uploads/2020/07/Perk-Up-Your-Morning.jpg"} alt={"title"} className="package-image" style={{right:"-11vw"}}/>
+            </div>
+
+            <div className="package-info" style={{marginRight: "25vw",}} >
+              <h1 className="package-title" style={{textAlign: "left"}}>
+                {"We Cater for Any Occasion!"}
+              </h1>
+              
+              <ul className="catering-event-list">
+                {cateringEvents.map((event, index) => (
+                  <li>
+                    <img src={event.image} alt={event.title} />
+                    <span>{event.title}</span>
+                  </li>
+                ))}
+              </ul>
+
+            </div>
+
+          </div>
+        </div>
+
+
       {/* ordering instructions */}
       <div className="order-instructions-wrapper">
         <div className="order-instructions-inner">
@@ -244,6 +302,8 @@ const Catering = () => {
               <p className="order-step-text">- {item.instruction}</p>
             </div>
           ))}
+
+          <p style={{ alignSelf: "center", marginTop: "2vw", maxWidth: "100%", fontSize: "1.2vw"}}> Looking for something different? We offer custom catering packages tailored to your event — just ask! </p>
         </div>
       </div>
 
