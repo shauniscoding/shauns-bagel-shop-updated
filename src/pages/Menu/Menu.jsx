@@ -1,200 +1,121 @@
 import "./Menu.css";
 import Navbar from "../Navbar/Navbar";
-
 import MenuItem from "./MenuItem";
 import MenuCategory from "./MenuCategory";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
+// Future move menudata into seperate api endpoint
 const menuData = {
   categories: [
     {
       title: "Bagels",
-      slogan: "Freshly baked, chewy, and perfect for any time of day",
-      image:
-        "https://ebcatering.com/usercontent/product_sub_img/Bagels&ShmearNoshBox2Dozen-830x3491.jpg",
-      items: [
-        {
-          name: "Classic Everything Bagel",
-          description:
-            "Loaded with sesame, poppy seeds, garlic, onion, and salt.",
-          image:
-            "https://colonelde.com/cdn/shop/files/SouthoftheBorderBeefRoast_3_1024x1024.png?v=1704148121",
-          rating: 4.7,
-          price: 1.99,
-        },
-        {
-          name: "Cinnamon Raisin Bagel",
-          description: "Sweet bagel with cinnamon swirls and plump raisins.",
-          image:
-            "https://foodovercomfort.com/wp-content/uploads/2024/04/sourdough-cinnamon-raisin-bagels-1.jpg",
-          rating: 4.5,
-          price: 2.29,
-        },
-      ],
+      image: "https://ebcatering.com/usercontent/product_sub_img/Bagels&ShmearNoshBox2Dozen-830x3491.jpg",
     },
     {
       title: "Donuts",
-      slogan: "Freshly made, fluffy, and perfectly sweet",
-      image:
-        "https://thefirstyearblog.com/wp-content/uploads/2023/01/Gluten-Free-Donuts-Square.png",
-      items: [
-        {
-          name: "Cinnamon Sugar",
-          description:
-            "A classic donut coated generously with cinnamon and sugar.",
-          image:
-            "https://www.beyondthechickencoop.com/wp-content/uploads/2024/04/Cinnamon-Sugar-Cake-Donuts.jpg",
-          rating: 4.6,
-          price: 2.49,
-        },
-        {
-          name: "Maple Bacon",
-          description: "Sweet maple glaze topped with crispy bacon bits.",
-          image:
-            "https://images.squarespace-cdn.com/content/v1/5a9b45661137a61f8f83b732/1547596568405-YW0OIL3G54FYU22OZ7LB/IMG_4404.jpg",
-          rating: 4.8,
-          price: 3.99,
-        },
-        {
-          name: "Strawberry Frosted",
-          description: "Sweet strawberry icing with rainbow sprinkles.",
-          image:
-            "https://bakingmischief.com/wp-content/uploads/2016/05/strawberry-glazed-sencha-green-tea-doughnuts-2.jpg",
-          rating: 4.5,
-          price: 3.19,
-        },
-        {
-          name: "Boston Cream",
-          description: "Filled with vanilla custard and topped with chocolate.",
-          image:
-            "https://thebananadiaries.com/wp-content/uploads/2023/08/vegan-boston-cream-donuts_6421.jpg",
-          rating: 4.8,
-          price: 3.49,
-        },
-        {
-          name: "Glazed Classic",
-          description: "Light and airy with a sweet sugar glaze.",
-          image:
-            "https://www.sprinkleofthis.com/wp-content/uploads/2020/03/DSC_9390.jpg",
-          rating: 4.6,
-          price: 2.49,
-        },
-        {
-          name: "Red Velvet",
-          description:
-            "Rich red velvet donut topped with cream cheese frosting.",
-          image:
-            "https://gingersnapsbakingaffairs.com/wp-content/uploads/2024/01/red-velvet-donuts-plated-1200px.jpg",
-          rating: 4.7,
-          price: 3.29,
-        },
-        {
-          name: "Lemon Glazed",
-          description: "Zesty lemon glaze over a soft, fluffy donut.",
-          image:
-            "https://stephaniessweets.com/wp-content/uploads/2023/05/IMG_3220.jpg",
-          rating: 4.4,
-          price: 2.89,
-        },
-        {
-          name: "Blueberry Basil",
-          description: "Fresh blueberry glaze infused with hints of basil.",
-          image:
-            "https://bromabakery.com/wp-content/uploads/2013/05/MG_3292-2.jpg",
-          rating: 4.5,
-          price: 3.19,
-        },
-        {
-          name: "Salted Caramel",
-          description: "Rich caramel glaze sprinkled with sea salt flakes.",
-          image:
-            "https://maisonmarmite.com/wp-content/uploads/2024/02/donuts-salt-caramel-sale-max-00.jpg",
-          rating: 4.6,
-          price: 3.39,
-        },
-        {
-          name: "Cookies & Cream",
-          description: "Vanilla icing topped with crushed chocolate cookies.",
-          image:
-            "https://bakerbynature.com/wp-content/uploads/2016/03/IMG_7694-7-3.jpg",
-          rating: 4.7,
-          price: 3.49,
-        },
-      ],
+      image: "https://thefirstyearblog.com/wp-content/uploads/2023/01/Gluten-Free-Donuts-Square.png",
     },
     {
       title: "Waffles",
-      slogan: "Golden, crispy on the outside, soft and fluffy inside",
-      image:
-        "https://www.splenda.com/wp-content/uploads/2020/12/fluffy-belgian-waffles-2000x1000.jpg",
-      items: [
-        {
-          name: "Classic Belgian Waffle",
-          description: "Light and crispy Belgian waffle with maple syrup.",
-          image: "https://example.com/images/classic-belgian-waffle.jpg",
-          rating: 4.7,
-          price: 4.99,
-        },
-        {
-          name: "Chocolate Chip Waffle",
-          description: "Waffle filled with melted chocolate chips.",
-          image: "https://example.com/images/choc-chip-waffle.jpg",
-          rating: 4.5,
-          price: 5.29,
-        },
-      ],
+      image: "https://www.splenda.com/wp-content/uploads/2020/12/fluffy-belgian-waffles-2000x1000.jpg",
     },
     {
       title: "Pancakes",
-      slogan: "Fluffy stacks served warm with your favorite toppings",
-      image:
-        "https://ichef.bbc.co.uk/ace/standard/1600/food/recipes/fluffyamericanpancak_74828_16x9.jpg.webp",
-      items: [
-        {
-          name: "Buttermilk Pancakes",
-          description: "Classic buttermilk pancakes with butter and syrup.",
-          image: "https://example.com/images/buttermilk-pancakes.jpg",
-          rating: 4.8,
-          price: 4.49,
-        },
-        {
-          name: "Blueberry Pancakes",
-          description: "Fluffy pancakes bursting with fresh blueberries.",
-          image: "https://example.com/images/blueberry-pancakes.jpg",
-          rating: 4.7,
-          price: 4.99,
-        },
-      ],
+      image: "https://ichef.bbc.co.uk/ace/standard/1600/food/recipes/fluffyamericanpancak_74828_16x9.jpg.webp",
     },
     {
       title: "Eggs",
-      slogan: "Farm fresh eggs cooked just the way you like",
-      image:
-        "https://ncegg.org/wp-content/uploads/2018/03/Cloud-Eggs-with-Ham.jpg",
-      items: [
-        {
-          name: "Classic Scrambled Eggs",
-          description: "Soft and creamy scrambled eggs with a hint of butter.",
-          image: "https://example.com/images/scrambled-eggs.jpg",
-          rating: 4.6,
-          price: 3.99,
-        },
-        {
-          name: "Cloud Eggs",
-          description:
-            "Whipped egg whites baked to fluffy perfection with yolk centers.",
-          image: "https://example.com/images/cloud-eggs.jpg",
-          rating: 4.8,
-          price: 5.49,
-        },
-      ],
+      image: "https://ncegg.org/wp-content/uploads/2018/03/Cloud-Eggs-with-Ham.jpg",
+    },
+    {
+      title: "Sandwiches",
+      image: "https://www.foodnetwork.com/content/dam/images/food/fullset/2022/04/04/0/FN_BLACKSTONE-BREAKFAST-SANDWICHES-H-f_s4x3.jpg",
+    },
+    {
+      title: "Toast",
+      image: "https://www.budgetbytes.com/wp-content/uploads/2023/01/French-Toast-syrup.jpg",
+    },
+    {
+      title: "Cereals",
+      image: "https://images.squarespace-cdn.com/content/v1/569a6ade9cadb6436a7df7ad/1453000837141-9SWGDF6P26G4S4F9FYTL/home-carousel-image-1.jpg?format=2500w",
+    },
+    {
+      title: "Sides",
+      image: "https://media.istockphoto.com/id/147094980/photo/breakfast-eggs.jpg?s=612x612&w=0&k=20&c=yICvFV-aMQqV4fcf7UO_LZBssQGAIYpWn0WAiiqKTFw=",
+    },
+    {
+      title: "Smoothies",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwEjvVnhIxJ2CbACSdi0IG_bB7mOjzheSZQHtJImfjn4XnPSKMMy4T7LY5xsEon3gDY00&usqp=CAU",
+    },
+    {
+      title: "Juices",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK6317BvipOK5qyGQpVu4HH56SgoHNzCfRZg&s",
+    },
+    {
+      title: "Coffee",
+      image: "https://static.toiimg.com/thumb/msid-114292064,imgsize-114146,width-400,resizemode-4/114292064.jpg",
     },
   ],
 };
 
+
 const Menu = () => {
   const bagelObject = menuData.categories.find((c) => c.title === "Bagels");
-  const [selectedCategory, setSelectedCategory] = useState(bagelObject);
+
+  // Initialize cachedData from sessionStorage or empty object
+  const [cachedData, setCachedData] = useState(() => {
+    const savedCache = sessionStorage.getItem("menuCache");
+    return savedCache ? JSON.parse(savedCache) : {};
+  });
+
+  const [selectedCategoryName, setSelectedCategoryName] = useState("Bagels");
+
+  const [selectedCategory, setSelectedCategory] = useState(() => {
+    // Use cached data for Bagels or fallback to bagelObject
+    return cachedData["Bagels"] || bagelObject;
+  });
+
+  const [loading, setLoading] = useState(false);
+
+  const apiKey1 = import.meta.env.VITE_API_KEY;
+  const apiKey2 = import.meta.env.VITE_API_KEY_2;
+  const apiKey3 = import.meta.env.VITE_API_KEY_3;
+
+  useEffect(() => {
+    if (cachedData[selectedCategoryName]) {
+      console.log("Using cached data for category:", selectedCategoryName);
+      setSelectedCategory(cachedData[selectedCategoryName]);
+      setLoading(false);
+      return;
+    }
+
+    setLoading(true);
+
+    fetch(`https://shauns-bagel-shop-backend.onrender.com/menu/${selectedCategoryName}`, {
+      method: "GET",
+      headers: {
+        "api-key-1": apiKey1,
+        "api-key-2": apiKey2,
+        "api-key-3": apiKey3,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setSelectedCategory(data);
+
+        setCachedData((prev) => {
+          const updated = {
+            ...prev,
+            [selectedCategoryName]: data,
+          };
+          // Save updated cache to sessionStorage
+          sessionStorage.setItem("menuCache", JSON.stringify(updated));
+          return updated;
+        });
+      })
+      .catch((error) => console.error("Error fetching data:", error))
+      .finally(() => setLoading(false));
+  }, [selectedCategoryName]);
 
   return (
     <div style={{ display: "flex", flexDirection: "row", height: "100vh" }}>
@@ -210,11 +131,7 @@ const Menu = () => {
               key={index}
               onClick={() => {
                 console.log("Category clicked:", category.title);
-                const selected = menuData.categories.find(
-                  (c) => c.title === category.title
-                );
-                console.log(selected);
-                setSelectedCategory(selected);
+                setSelectedCategoryName(category.title);
               }}
             />
           ))}
@@ -224,11 +141,7 @@ const Menu = () => {
       <div className="vertical-line-seperator"></div>
 
       <div className="menu-items-container">
-        <div
-          style={{
-            marginLeft: "2vw",
-          }}
-        >
+        <div style={{ marginLeft: "2vw" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
             <div
               style={{
@@ -254,22 +167,51 @@ const Menu = () => {
           </p>
         </div>
 
-        <div className="menu-items">
-          {selectedCategory.items.map((item, index) => (
-            <MenuItem
-              image={item.image}
-              name={item.name}
-              key={index}
-              description={item.description}
-              rating={item.rating}
-              price={item.price}
-            />
-          ))}
 
-          {/* Add more MenuItem components as needed */}
-        </div>
+        {loading ? (
+          <div className="menu-items"
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+            <img
+              src={"/images/loading.gif"}
+              alt="Loading"
+              style={{ width: "5vw", height: "5vw" }}
+            />
+            <p style={{ fontSize: "1.5vw", marginTop: "1vw" }}>
+              Loading menu items...
+            </p>
+          </div>
+        ) : 
+        (
+          <div className="menu-items">
+              {
+                selectedCategory.items &&
+                selectedCategory.items.map((item, index) => (
+                  <MenuItem
+                    image={item.image}
+                    name={item.name}
+                    key={index}
+                    description={item.description}
+                    rating={item.rating}
+                    price={item.price}
+                  />
+                ))
+              }
+          </div>
+        )
+      }
+
+
+
       </div>
     </div>
   );
 };
+
+
 export default Menu;
