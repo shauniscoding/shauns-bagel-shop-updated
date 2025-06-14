@@ -101,7 +101,7 @@
 .splash-text-container h1 {
   font-size: 7.6vw;
   margin: 0 0 0.6rem 0;
-  color: rgb(249, 245, 235);
+  color: #f7e9c6;
   font-weight: 600;
   line-height: 1.1;
   text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
@@ -117,7 +117,7 @@
   font-size: 2vw;
   max-width: 70%;
   line-height: 1.4;
-  color: rgb(249, 245, 235);
+  color: #f7e9c6;
   font-weight: 400;
   margin: 0 auto;
   letter-spacing: 0.02em;
