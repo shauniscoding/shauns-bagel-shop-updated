@@ -8,8 +8,9 @@ import {
   LoadScript,
   Marker,
   Autocomplete,
+  useLoadScript,
 } from "@react-google-maps/api";
-import React, { useState, useEffect, use } from "react";
+import React, { useState, useEffect } from "react";
 
 // todo conevrt all address to geo location
 // center location should be user's current location
@@ -47,11 +48,18 @@ const Locations = () => {
   const [distance, setDistance] = useState("100");
   const [isLoading, setIsLoading] = useState(true);
   const [locationsData, setLocationsData] = useState([]);
+  const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 
   const apiKey1 = import.meta.env.VITE_API_KEY;
   const apiKey2 = import.meta.env.VITE_API_KEY_2;
   const apiKey3 = import.meta.env.VITE_API_KEY_3;
 
+
+  const { isLoadedMap, loadError } = useLoadScript({
+    googleMapsApiKey: apiKey,
+  });
+
+  
    useEffect(() => {
     fetch("https://shauns-bagel-shop-backend.onrender.com/locations", {
       method: "GET",
@@ -64,7 +72,6 @@ const Locations = () => {
       .then((response) => response.json())
       .then((data) => {
         setLocationsData(data);
-        console.log("Fetched locations:", data);
       })
       .catch((error) => console.error("Error fetching locations:", error))
       .finally(() => setIsLoading(false));
@@ -111,16 +118,18 @@ const Locations = () => {
     setSortedLocations(sorted);
   }, [userLocation, locationsData, distance]);
 
-  const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
   if (!apiKey) {
     console.error("Google Maps API key is not defined in env.");
     return <div>Error: Google Maps API key is not defined.</div>;
   }
 
-  if (isLoading) {
+  if (isLoading || isLoadedMap) {
     return <div>Loading...</div>;
   }
   
+    if (loadError) return <div>Error loading maps</div>;
+
+
   return (
     <div style={{ display: "flex", flexDirection: "row", height: "100vh" }}>
       <Navbar />
@@ -199,8 +208,7 @@ const Locations = () => {
 
       <div className="vertical-line"></div>
 
-      <div className="google-map-container">
-        <LoadScript googleMapsApiKey={apiKey}>
+      <div className="google-map-container" style={{backgroundColor: "#F5F5F5"}}>
           <GoogleMap
             mapContainerStyle={{
               width: "100%",
@@ -234,7 +242,6 @@ const Locations = () => {
               />
             ))}
           </GoogleMap>
-        </LoadScript>
       </div>
     </div>
   );
