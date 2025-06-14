@@ -47,6 +47,8 @@ const Locations = () => {
   const [autocomplete, setAutocomplete] = useState(null);
   const [inputValue, setInputValue] = useState("");
   const [selectedLocation, setSelectedLocation] = useState(null);
+  const [loadingTimeoutExpired, setLoadingTimeoutExpired] = useState(false);
+
 
   const [mapInstance, setMapInstance] = useState(null);
   const polylineRef = useRef(null);
@@ -97,6 +99,20 @@ const Locations = () => {
       .catch((error) => console.error("Error fetching locations:", error))
       .finally(() => setIsLoading(false));
   }, []);
+
+  useEffect(() => {
+  let timer;
+  if (isLoadingTable) {
+    setLoadingTimeoutExpired(false); 
+    timer = setTimeout(() => {
+      setLoadingTimeoutExpired(true);
+    }, 10000); 
+  } else {
+    setLoadingTimeoutExpired(false); 
+  }
+
+  return () => clearTimeout(timer);
+}, [isLoadingTable]);
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -238,6 +254,13 @@ const Locations = () => {
             style={{ justifyContent: "center", alignItems: "center" }}
           >
             <img src={loading} style={{ width: "5vw", height: "5vw" }} />
+
+            {loadingTimeoutExpired && (
+              <p style={{ marginTop: "1rem", color: "red" }}>
+                Waiting for server to boot, please wait a moment...
+              </p>
+            )}
+
           </div>
         ) : (
           <div className="locations-list-container">
@@ -273,7 +296,16 @@ const Locations = () => {
 
       <div className="google-map-container">
         {!isLoaded ? (
-          <img src={loading} style={{ width: "5vw", height: "5vw" }} />
+
+
+          <>
+            <img src={loading} style={{ width: "5vw", height: "5vw" }} />
+            {loadingTimeoutExpired && (
+              <p style={{ marginTop: "1rem", color: "red" }}>
+                Waiting for server to boot, please wait a moment...
+              </p>
+            )}
+          </>
         ) : (
           <GoogleMap
             onLoad={(map) => setMapInstance(map)}
