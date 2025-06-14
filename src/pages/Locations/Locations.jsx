@@ -11,7 +11,7 @@ import {
   Autocomplete,
   useLoadScript,
 } from "@react-google-maps/api";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 const center = {
   lat: 37.7749,
@@ -46,6 +46,10 @@ const Locations = () => {
   const [locationsData, setLocationsData] = useState([]);
   const [autocomplete, setAutocomplete] = useState(null);
   const [inputValue, setInputValue] = useState("");
+  const [selectedLocation, setSelectedLocation] = useState(null);
+
+  const [mapInstance, setMapInstance] = useState(null);
+  const polylineRef = useRef(null);
 
   const onLoad = (autoC) => setAutocomplete(autoC);
 
@@ -67,20 +71,17 @@ const Locations = () => {
     }
   };
 
-
   const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
   const apiKey1 = import.meta.env.VITE_API_KEY;
   const apiKey2 = import.meta.env.VITE_API_KEY_2;
   const apiKey3 = import.meta.env.VITE_API_KEY_3;
-
 
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: apiKey,
     libraries: ["places"],
   });
 
-  
-   useEffect(() => {
+  useEffect(() => {
     fetch("https://shauns-bagel-shop-backend.onrender.com/locations", {
       method: "GET",
       headers: {
@@ -97,7 +98,6 @@ const Locations = () => {
       .finally(() => setIsLoading(false));
   }, []);
 
-  // 2. Get user's location
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -118,7 +118,6 @@ const Locations = () => {
     }
   }, []);
 
-  // 3. Sort/filter once both location and data are ready + every time `distance` changes
   useEffect(() => {
     if (!userLocation || locationsData.length === 0) return;
 
@@ -138,15 +137,42 @@ const Locations = () => {
     setSortedLocations(sorted);
   }, [userLocation, locationsData, distance]);
 
+  // Manage polyline manually so only one is visible
+  useEffect(() => {
+    if (!userLocation || !selectedLocation || !mapInstance || !window.google) return;
+
+    // Remove old polyline
+    if (polylineRef.current) {
+      polylineRef.current.setMap(null);
+    }
+
+    // Create new polyline
+    const newPolyline = new window.google.maps.Polyline({
+      path: [userLocation, selectedLocation],
+      strokeColor: "red",
+      strokeOpacity: 1,
+      strokeWeight: 2,
+      clickable: false,
+    });
+
+    newPolyline.setMap(mapInstance);
+    polylineRef.current = newPolyline;
+
+    // Cleanup on unmount or dependency change
+    return () => {
+      if (polylineRef.current) {
+        polylineRef.current.setMap(null);
+        polylineRef.current = null;
+      }
+    };
+  }, [userLocation, selectedLocation, mapInstance]);
+
   if (!apiKey) {
     console.error("Google Maps API key is not defined in env.");
     return <div>Error: Google Maps API key is not defined.</div>;
   }
 
-
-  
-    if (loadError) return <div>Error loading maps</div>;
-
+  if (loadError) return <div>Error loading maps</div>;
 
   return (
     <div style={{ display: "flex", flexDirection: "row", height: "100vh" }}>
@@ -165,32 +191,33 @@ const Locations = () => {
             justifyContent: "center",
           }}
         >
-         <div style={{ position: "relative", width: "80%" }}>
-          {!isLoaded ? (
-            <img src={loading} style={{ width: "5vw", height: "5vw" }} />
-          ) : (
-            <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
-              <input
-                type="text"
-                placeholder="Enter location"
-                className="input-location"
-                style={{ width: 300, height: 45, padding: 10 }}
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-              />
-            </Autocomplete>
-          )}
+          <div style={{ position: "relative", width: "80%" }}>
+            {!isLoaded ? (
+              <img src={loading} style={{ width: "5vw", height: "5vw" }} />
+            ) : (
+              <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
+                <input
+                  type="text"
+                  placeholder="Enter location"
+                  className="input-location"
+                  style={{ width: 300, height: 45, padding: 10 }}
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                />
+              </Autocomplete>
+            )}
 
-          {inputValue.trim() === "" && (
-            <span className="location-icon-container">
-              <img src={location} alt="icon" />
-            </span>
-          )}
-        </div>
+            {inputValue.trim() === "" && (
+              <span className="location-icon-container">
+                <img src={location} alt="icon" />
+              </span>
+            )}
+          </div>
 
           <select
             className="distance-drop-down"
             onChange={(e) => setDistance(e.target.value)}
+            value={distance}
           >
             <option value="1">1 mile</option>
             <option value="5">5 miles</option>
@@ -205,42 +232,51 @@ const Locations = () => {
           </select>
         </div>
 
-        {isLoadingTable ? (<div className="locations-list-container" style={{justifyContent: "center", alignItems: "center"}}>
-            <img src={loading} style={{width:"5vw", height: "5vw"}}/>
-        </div>) : (<div className="locations-list-container">
-          {sortedLocations.length === 0 ? (
-            <p>No locations within {distance} miles.</p>
-          ) : (
-            sortedLocations.map((location, index) => (
-              <LocationItem
-                key={index}
-                image={location.image}
-                city={location.city}
-                street={location.street}
-                miles={location.miles}
-                phone={location.phone}
-                hours={location.hours}
-                address={location.address}
-                onClick={() => {
-                  setMapCenter({
-                    lat: location.geolocation[0],
-                    lng: location.geolocation[1],
-                  });
-                  console.log("Clicked:", location.city);
-                }}
-              />
-            ))
-          )}
-        </div> )
-        }
-
+        {isLoadingTable ? (
+          <div
+            className="locations-list-container"
+            style={{ justifyContent: "center", alignItems: "center" }}
+          >
+            <img src={loading} style={{ width: "5vw", height: "5vw" }} />
+          </div>
+        ) : (
+          <div className="locations-list-container">
+            {sortedLocations.length === 0 ? (
+              <p>No locations within {distance} miles.</p>
+            ) : (
+              sortedLocations.map((location, index) => (
+                <LocationItem
+                  key={index}
+                  image={location.image}
+                  city={location.city}
+                  street={location.street}
+                  miles={location.miles}
+                  phone={location.phone}
+                  hours={location.hours}
+                  address={location.address}
+                  onClick={() => {
+                    const loc = {
+                      lat: location.geolocation[0],
+                      lng: location.geolocation[1],
+                    };
+                    setMapCenter(loc);
+                    setSelectedLocation(loc);
+                  }}
+                />
+              ))
+            )}
+          </div>
+        )}
       </aside>
 
       <div className="vertical-line"></div>
 
       <div className="google-map-container">
-        {!isLoaded ? (<img src={loading} style={{width:"5vw", height: "5vw"}}/>) : (
+        {!isLoaded ? (
+          <img src={loading} style={{ width: "5vw", height: "5vw" }} />
+        ) : (
           <GoogleMap
+            onLoad={(map) => setMapInstance(map)}
             mapContainerStyle={{
               width: "100%",
               height: "100%",
@@ -249,10 +285,10 @@ const Locations = () => {
             center={mapCenter}
             zoom={14}
             options={{
-              mapTypeControl: false, // Hide map type buttons (Satellite, Terrain, etc)
-              mapTypeId: "roadmap", // Force the map to show only the roadmap style
-              streetViewControl: false, // Optional: hide Street View pegman
-              fullscreenControl: false, // Optional: hide fullscreen control
+              mapTypeControl: false,
+              mapTypeId: "roadmap",
+              streetViewControl: false,
+              fullscreenControl: false,
               minZoom: 4,
               maxZoom: 10,
             }}
@@ -273,9 +309,10 @@ const Locations = () => {
               />
             ))}
           </GoogleMap>
-          )}
+        )}
       </div>
     </div>
   );
 };
+
 export default Locations;
