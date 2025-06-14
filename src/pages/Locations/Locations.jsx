@@ -9,7 +9,7 @@ import {
   Marker,
   Autocomplete,
 } from "@react-google-maps/api";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, use } from "react";
 
 // todo conevrt all address to geo location
 // center location should be user's current location
@@ -20,119 +20,6 @@ const center = {
   lat: 37.7749,
   lng: -122.4194,
 };
-
-const dummyLocations = [
-  {
-    image:
-      "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=400&q=80",
-    city: "Seattle",
-    street: "456 Maple Ave",
-    miles: "1.2",
-    phone: "(555) 987-6543",
-    hours: "9am - 8pm",
-    address: "456 Maple Ave, Seattle, WA 98101",
-    geolocation: [40.184662, -80.2656],
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=400&q=80",
-    city: "Los Angeles",
-    street: "789 Sunset Blvd",
-    miles: "3.5",
-    phone: "(555) 321-7890",
-    hours: "10am - 9pm",
-    address: "789 Sunset Blvd, Los Angeles, CA 90028",
-    geolocation: [34.09809, -118.311448],
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=400&q=80",
-    city: "Chicago",
-    street: "1010 Lake Shore Dr",
-    miles: "0.8",
-    phone: "(555) 555-1234",
-    hours: "8am - 6pm",
-    address: "1010 Lake Shore Dr, Chicago, IL 60611",
-    geolocation: [41.89194, -87.61092],
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=400&q=80",
-    city: "New York",
-    street: "300 Broadway",
-    miles: "2.1",
-    phone: "(555) 111-2222",
-    hours: "7am - 7pm",
-    address: "300 Broadway, New York, NY 10007",
-    geolocation: [40.712776, -74.005974],
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=400&q=80",
-    city: "Austin",
-    street: "800 Congress Ave",
-    miles: "4.0",
-    phone: "(555) 999-8888",
-    hours: "11am - 10pm",
-    address: "800 Congress Ave, Austin, TX 78701",
-    geolocation: [30.2672, -97.7431],
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=400&q=80",
-    city: "San Francisco",
-    street: "123 Market St",
-    miles: "0.5",
-    phone: "(555) 234-5678",
-    hours: "6am - 6pm",
-    address: "123 Market St, San Francisco, CA 94103",
-    geolocation: [37.7749, -122.4194],
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=400&q=80",
-    city: "Miami",
-    street: "555 Ocean Dr",
-    miles: "1.9",
-    phone: "(555) 777-7777",
-    hours: "10am - 10pm",
-    address: "555 Ocean Dr, Miami, FL 33139",
-    geolocation: [25.7617, -80.1918],
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=400&q=80",
-    city: "Denver",
-    street: "2100 Blake St",
-    miles: "2.6",
-    phone: "(555) 333-4444",
-    hours: "9am - 5pm",
-    address: "2100 Blake St, Denver, CO 80205",
-    geolocation: [39.7392, -104.9903],
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=400&q=80",
-    city: "Boston",
-    street: "600 Boylston St",
-    miles: "1.0",
-    phone: "(555) 876-5432",
-    hours: "8am - 8pm",
-    address: "600 Boylston St, Boston, MA 02116",
-    geolocation: [42.3601, -71.0589],
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=400&q=80",
-    city: "Portland",
-    street: "200 Burnside St",
-    miles: "0.7",
-    phone: "(555) 111-3333",
-    hours: "7am - 9pm",
-    address: "200 Burnside St, Portland, OR 97209",
-    geolocation: [45.5236, -122.675],
-  },
-];
 
 // Function to calculate distance in miles between two geolocations
 const getDistanceMiles = (lat1, lon1, lat2, lon2) => {
@@ -158,7 +45,32 @@ const Locations = () => {
   const [userLocation, setUserLocation] = useState(null);
   const [sortedLocations, setSortedLocations] = useState([]);
   const [distance, setDistance] = useState("100");
+  const [isLoading, setIsLoading] = useState(true);
+  const [locationsData, setLocationsData] = useState([]);
 
+  const apiKey1 = import.meta.env.VITE_API_KEY;
+  const apiKey2 = import.meta.env.VITE_API_KEY_2;
+  const apiKey3 = import.meta.env.VITE_API_KEY_3;
+
+   useEffect(() => {
+    fetch("https://shauns-bagel-shop-backend.onrender.com/locations", {
+      method: "GET",
+      headers: {
+        "api-key-1": apiKey1,
+        "api-key-2": apiKey2,
+        "api-key-3": apiKey3,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setLocationsData(data);
+        console.log("Fetched locations:", data);
+      })
+      .catch((error) => console.error("Error fetching locations:", error))
+      .finally(() => setIsLoading(false));
+  }, []);
+
+  // 2. Get user's location
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -169,19 +81,6 @@ const Locations = () => {
           };
           setUserLocation(userLoc);
           setMapCenter(userLoc);
-
-          // Calculate distances once after getting user location
-          dummyLocations.forEach((location) => {
-            location.miles = getDistanceMiles(
-              userLoc.lat,
-              userLoc.lng,
-              location.geolocation[0],
-              location.geolocation[1]
-            ).toFixed(2);
-          });
-
-          // If you want to force re-render after updating dummyLocations
-          // you can also use state to store dummyLocations, or just force update.
         },
         (error) => {
           console.error("Error getting location:", error);
@@ -192,11 +91,11 @@ const Locations = () => {
     }
   }, []);
 
-  // Second useEffect to sort locations based on distance from given location
+  // 3. Sort/filter once both location and data are ready + every time `distance` changes
   useEffect(() => {
-    if (!userLocation) return;
+    if (!userLocation || locationsData.length === 0) return;
 
-    const sortedLocations = [...dummyLocations]
+    const sorted = locationsData
       .map((location) => {
         const miles = getDistanceMiles(
           userLocation.lat,
@@ -206,18 +105,22 @@ const Locations = () => {
         );
         return { ...location, miles: miles.toFixed(2) };
       })
-      .filter((location) => parseFloat(location.miles) < distance)
+      .filter((loc) => parseFloat(loc.miles) <= parseFloat(distance))
       .sort((a, b) => parseFloat(a.miles) - parseFloat(b.miles));
 
-    setSortedLocations(sortedLocations);
-  }, [userLocation, distance]);
+    setSortedLocations(sorted);
+  }, [userLocation, locationsData, distance]);
 
   const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
   if (!apiKey) {
-    console.error("Google Maps API key is not defined.");
+    console.error("Google Maps API key is not defined in env.");
     return <div>Error: Google Maps API key is not defined.</div>;
   }
 
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  
   return (
     <div style={{ display: "flex", flexDirection: "row", height: "100vh" }}>
       <Navbar />
@@ -297,7 +200,7 @@ const Locations = () => {
       <div className="vertical-line"></div>
 
       <div className="google-map-container">
-        <LoadScript googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
+        <LoadScript googleMapsApiKey={apiKey}>
           <GoogleMap
             mapContainerStyle={{
               width: "100%",
@@ -317,7 +220,7 @@ const Locations = () => {
           >
             <Marker position={userLocation} title="Center Location" />
 
-            {dummyLocations.map((location, index) => (
+            {locationsData.map((location, index) => (
               <Marker
                 key={index}
                 position={{
