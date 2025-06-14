@@ -45,6 +45,7 @@ const Locations = () => {
   const [isLoadingTable, setIsLoading] = useState(true);
   const [locationsData, setLocationsData] = useState([]);
   const [autocomplete, setAutocomplete] = useState(null);
+  const [inputValue, setInputValue] = useState("");
 
   const onLoad = (autoC) => setAutocomplete(autoC);
 
@@ -73,7 +74,7 @@ const Locations = () => {
   const apiKey3 = import.meta.env.VITE_API_KEY_3;
 
 
-  const { isLoadedMap, loadError } = useLoadScript({
+  const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: apiKey,
     libraries: ["places"],
   });
@@ -142,9 +143,7 @@ const Locations = () => {
     return <div>Error: Google Maps API key is not defined.</div>;
   }
 
-  if (isLoadingTable || isLoadedMap) {
-    return <div>Loading...</div>;
-  }
+
   
     if (loadError) return <div>Error loading maps</div>;
 
@@ -166,26 +165,28 @@ const Locations = () => {
             justifyContent: "center",
           }}
         >
-          <div
-            style={{
-              position: "relative",
-              width: "80%",
-            }}
-          >
-             <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
+         <div style={{ position: "relative", width: "80%" }}>
+          {!isLoaded ? (
+            <img src={loading} style={{ width: "5vw", height: "5vw" }} />
+          ) : (
+            <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
               <input
                 type="text"
                 placeholder="Enter location"
                 className="input-location"
                 style={{ width: 300, height: 45, padding: 10 }}
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
               />
             </Autocomplete>
+          )}
 
-
+          {inputValue.trim() === "" && (
             <span className="location-icon-container">
               <img src={location} alt="icon" />
             </span>
-          </div>
+          )}
+        </div>
 
           <select
             className="distance-drop-down"
@@ -238,7 +239,7 @@ const Locations = () => {
       <div className="vertical-line"></div>
 
       <div className="google-map-container">
-        {isLoadedMap ? (<img src={loading} style={{width:"5vw", height: "5vw"}}/>) : (
+        {!isLoaded ? (<img src={loading} style={{width:"5vw", height: "5vw"}}/>) : (
           <GoogleMap
             mapContainerStyle={{
               width: "100%",
