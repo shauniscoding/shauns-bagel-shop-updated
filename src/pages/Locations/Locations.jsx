@@ -3,6 +3,7 @@ import Navbar from "../Navbar/Navbar.jsx";
 import location from "/images/location.png";
 import bagelPin from "/images/bagelPin.png";
 import LocationItem from "./LocationItem.jsx";
+import loading from "/images/loading.gif";
 import {
   GoogleMap,
   LoadScript,
@@ -11,11 +12,6 @@ import {
   useLoadScript,
 } from "@react-google-maps/api";
 import React, { useState, useEffect } from "react";
-
-// todo conevrt all address to geo location
-// center location should be user's current location
-//  compare the geo location with the center location
-// allow user to enter an address than use that as the center location and also find closer locations
 
 const center = {
   lat: 37.7749,
@@ -46,10 +42,32 @@ const Locations = () => {
   const [userLocation, setUserLocation] = useState(null);
   const [sortedLocations, setSortedLocations] = useState([]);
   const [distance, setDistance] = useState("100");
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingTable, setIsLoading] = useState(true);
   const [locationsData, setLocationsData] = useState([]);
-  const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
+  const [autocomplete, setAutocomplete] = useState(null);
 
+  const onLoad = (autoC) => setAutocomplete(autoC);
+
+  const onPlaceChanged = () => {
+    if (autocomplete !== null) {
+      const place = autocomplete.getPlace();
+      const location = place?.geometry?.location;
+
+      if (location) {
+        const newCenter = {
+          lat: location.lat(),
+          lng: location.lng(),
+        };
+        setMapCenter(newCenter);
+        setUserLocation(newCenter);
+      }
+    } else {
+      console.log("Autocomplete not loaded yet!");
+    }
+  };
+
+
+  const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
   const apiKey1 = import.meta.env.VITE_API_KEY;
   const apiKey2 = import.meta.env.VITE_API_KEY_2;
   const apiKey3 = import.meta.env.VITE_API_KEY_3;
@@ -57,6 +75,7 @@ const Locations = () => {
 
   const { isLoadedMap, loadError } = useLoadScript({
     googleMapsApiKey: apiKey,
+    libraries: ["places"],
   });
 
   
@@ -123,7 +142,7 @@ const Locations = () => {
     return <div>Error: Google Maps API key is not defined.</div>;
   }
 
-  if (isLoading || isLoadedMap) {
+  if (isLoadingTable || isLoadedMap) {
     return <div>Loading...</div>;
   }
   
@@ -153,11 +172,15 @@ const Locations = () => {
               width: "80%",
             }}
           >
-            <input
-              type="text"
-              placeholder="Address, City, or Zip Code"
-              className="input-location"
-            />
+             <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
+              <input
+                type="text"
+                placeholder="Enter location"
+                className="input-location"
+                style={{ width: 300, height: 45, padding: 10 }}
+              />
+            </Autocomplete>
+
 
             <span className="location-icon-container">
               <img src={location} alt="icon" />
@@ -176,10 +199,14 @@ const Locations = () => {
             <option value="100">100 miles</option>
             <option value="150">150 miles</option>
             <option value="500">500 miles</option>
+            <option value="1000">1000 miles</option>
+            <option value="9000000000000000">All</option>
           </select>
         </div>
 
-        <div className="locations-list-container">
+        {isLoadingTable ? (<div className="locations-list-container" style={{justifyContent: "center", alignItems: "center"}}>
+            <img src={loading} style={{width:"5vw", height: "5vw"}}/>
+        </div>) : (<div className="locations-list-container">
           {sortedLocations.length === 0 ? (
             <p>No locations within {distance} miles.</p>
           ) : (
@@ -203,12 +230,15 @@ const Locations = () => {
               />
             ))
           )}
-        </div>
+        </div> )
+        }
+
       </aside>
 
       <div className="vertical-line"></div>
 
-      <div className="google-map-container" style={{backgroundColor: "#F5F5F5"}}>
+      <div className="google-map-container">
+        {isLoadedMap ? (<img src={loading} style={{width:"5vw", height: "5vw"}}/>) : (
           <GoogleMap
             mapContainerStyle={{
               width: "100%",
@@ -242,6 +272,7 @@ const Locations = () => {
               />
             ))}
           </GoogleMap>
+          )}
       </div>
     </div>
   );
