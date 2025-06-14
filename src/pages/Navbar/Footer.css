@@ -59,6 +59,11 @@
 }
 
 .social-icons img {
+  filter: invert(1);
+}
+
+
+.social-icons img {
   width: 28px;
   height: 28px;
   object-fit: contain;

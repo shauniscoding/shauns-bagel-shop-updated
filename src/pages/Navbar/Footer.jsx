@@ -4,7 +4,7 @@ import "./Footer.css";
 import instagram from "/images/instagram-icon.png";
 import facebook from "/images/facebook-icon.png";
 import youtube from "/images/youtube-icon.png";
-// import X from "/images/x-icon.webp";
+import twitter from "/images/twitter-icon.png";
 import X from "/images/x-icon.png";
 
 const Footer = () => {
@@ -62,7 +62,7 @@ const Footer = () => {
             <img src={youtube} alt="Facebook" />
           </a>
           <a href="#" aria-label="X (formerly Twitter)">
-            <img src={X} alt="X (formerly Twitter)" />
+            <img src={twitter} alt="X (formerly Twitter)" />
           </a>
         </div>
       </div>

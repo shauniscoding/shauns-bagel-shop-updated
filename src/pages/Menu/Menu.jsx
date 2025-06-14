@@ -69,6 +69,7 @@ const Menu = () => {
   });
 
   const [selectedCategoryName, setSelectedCategoryName] = useState("Bagels");
+  const [showServerBootMessage, setShowServerBootMessage] = useState(false);
 
   const [selectedCategory, setSelectedCategory] = useState(() => {
     // Use cached data for Bagels or fallback to bagelObject
@@ -81,41 +82,48 @@ const Menu = () => {
   const apiKey2 = import.meta.env.VITE_API_KEY_2;
   const apiKey3 = import.meta.env.VITE_API_KEY_3;
 
-  useEffect(() => {
-    if (cachedData[selectedCategoryName]) {
-      console.log("Using cached data for category:", selectedCategoryName);
-      setSelectedCategory(cachedData[selectedCategoryName]);
-      setLoading(false);
-      return;
-    }
+ useEffect(() => {
+  if (cachedData[selectedCategoryName]) {
+    console.log("Using cached data for category:", selectedCategoryName);
+    setSelectedCategory(cachedData[selectedCategoryName]);
+    setLoading(false);
+    return;
+  }
 
-    setLoading(true);
+  setLoading(true);
+  setShowServerBootMessage(false); // reset on new request
 
-    fetch(`https://shauns-bagel-shop-backend.onrender.com/menu/${selectedCategoryName}`, {
-      method: "GET",
-      headers: {
-        "api-key-1": apiKey1,
-        "api-key-2": apiKey2,
-        "api-key-3": apiKey3,
-      },
+  const timeout = setTimeout(() => {
+    setShowServerBootMessage(true);
+  }, 10000); // 10 seconds
+
+  fetch(`https://shauns-bagel-shop-backend.onrender.com/menu/${selectedCategoryName}`, {
+    method: "GET",
+    headers: {
+      "api-key-1": apiKey1,
+      "api-key-2": apiKey2,
+      "api-key-3": apiKey3,
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      setSelectedCategory(data);
+
+      setCachedData((prev) => {
+        const updated = {
+          ...prev,
+          [selectedCategoryName]: data,
+        };
+        sessionStorage.setItem("menuCache", JSON.stringify(updated));
+        return updated;
+      });
     })
-      .then((response) => response.json())
-      .then((data) => {
-        setSelectedCategory(data);
-
-        setCachedData((prev) => {
-          const updated = {
-            ...prev,
-            [selectedCategoryName]: data,
-          };
-          // Save updated cache to sessionStorage
-          sessionStorage.setItem("menuCache", JSON.stringify(updated));
-          return updated;
-        });
-      })
-      .catch((error) => console.error("Error fetching data:", error))
-      .finally(() => setLoading(false));
-  }, [selectedCategoryName]);
+    .catch((error) => console.error("Error fetching data:", error))
+    .finally(() => {
+      clearTimeout(timeout); // stop showing the boot message
+      setLoading(false);
+    });
+}, [selectedCategoryName]);
 
   return (
     <div style={{ display: "flex", flexDirection: "row", height: "100vh" }}>
@@ -169,14 +177,15 @@ const Menu = () => {
 
 
         {loading ? (
-          <div className="menu-items"
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
+          <div
+            className="menu-items"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
             <img
               src={"/images/loading.gif"}
               alt="Loading"
@@ -185,26 +194,28 @@ const Menu = () => {
             <p style={{ fontSize: "1.5vw", marginTop: "1vw" }}>
               Loading menu items...
             </p>
+
+            {showServerBootMessage && (
+              <p style={{ fontSize: "1vw", marginTop: "0.5vw", color: "#aaa" }}>
+                Waiting for server to boot...
+              </p>
+            )}
           </div>
-        ) : 
-        (
+        ) : (
           <div className="menu-items">
-              {
-                selectedCategory.items &&
-                selectedCategory.items.map((item, index) => (
-                  <MenuItem
-                    image={item.image}
-                    name={item.name}
-                    key={index}
-                    description={item.description}
-                    rating={item.rating}
-                    price={item.price}
-                  />
-                ))
-              }
+            {selectedCategory.items &&
+              selectedCategory.items.map((item, index) => (
+                <MenuItem
+                  image={item.image}
+                  name={item.name}
+                  key={index}
+                  description={item.description}
+                  rating={item.rating}
+                  price={item.price}
+                />
+              ))}
           </div>
-        )
-      }
+        )}
 
 
 
