@@ -1,6 +1,7 @@
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Navbar/Footer";
 import AboutContainer from "./AboutContainer";
+import menu from "/images/menu.png";
 
 const About = () => {
   return (
@@ -13,6 +14,9 @@ const About = () => {
         overflowX: "hidden",
       }}
     >
+    <img src={menu} alt="Top Right Icon" className="fixed-icon" />
+      
+
       <Navbar />
 
        <div

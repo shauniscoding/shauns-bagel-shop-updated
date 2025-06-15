@@ -3,6 +3,7 @@ import Navbar from "../Navbar/Navbar";
 import MenuItem from "./MenuItem";
 import MenuCategory from "./MenuCategory";
 import React, { useState, useEffect } from "react";
+import menu from "/images/menu.png";
 
 // Future move menudata into seperate api endpoint
 const menuData = {
@@ -127,6 +128,9 @@ const Menu = () => {
 
   return (
     <div style={{ display: "flex", flexDirection: "row", height: "100vh" }}>
+      
+      <img src={menu} alt="Top Right Icon" className="fixed-icon"  style={{    filter: "invert(87%) sepia(20%) saturate(241%) hue-rotate(25deg) brightness(98%) contrast(87%)"}}/>
+
       <Navbar />
 
       <aside className="menu-container">

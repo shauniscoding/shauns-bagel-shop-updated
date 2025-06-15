@@ -9,12 +9,14 @@ import toast from "/images/recommended_toast.png";
 import panacke_promotion from "/images/pancake_promotion.jpg";
 import brunch_promotion from "/images/brunch_promotion.jpg";
 import donut_promotion from "/images/donut_promotion.jpg";
+import menu from "/images/menu.png";
 
 const Home = () => {
   return (
     <div className="background">
+      <img src={menu} alt="Top Right Icon" className="fixed-icon" />
       <Navbar />
-
+      
       {/* Main Content */}
       <main className="home-main" style={{ position: "relative" }}>
       <div style={{ position: "relative", width: "100%", height: "100%" }}>

@@ -129,3 +129,13 @@
   animation: fadeSlideUp 1s ease forwards;
   animation-delay: 0.7s; 
 }
+
+.fixed-icon {
+  position: fixed;
+  top: 6px;
+  right: 20px;
+  width: 4vw; 
+  height: 4vw;
+  z-index: 1000; 
+  filter: invert(94%) sepia(21%) saturate(327%) hue-rotate(16deg) brightness(102%) contrast(85%);
+}

@@ -15,6 +15,7 @@ import lightStart from "/images/lightStart.jpg";
 import approved from "/images/approved.png";
 import { useNavigate } from "react-router-dom";
 import "./Catering.css";
+import menu from "/images/menu.png";
 
 
   const iconData = [
@@ -190,6 +191,8 @@ const Catering = () => {
         overflowX: "hidden",
       }}
     >
+    <img src={menu} alt="Top Right Icon" className="fixed-icon" />
+      
       <Navbar />
 
       <div
