@@ -1,7 +1,7 @@
 # shauns-bagel-shop-updated
 
 An updated bagel shop page for my pretend bagel shop
-
+https://shauns-bagel-shop-updated.netlify.app/
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
