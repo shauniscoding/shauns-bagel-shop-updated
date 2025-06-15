@@ -28,6 +28,7 @@ const Home = () => {
           muted
           playsInline
           className="home-video"
+          // src="https://videocdn.cdnpk.net/videos/21b79c05-e523-4c7d-b389-56235e18b2db/horizontal/previews/videvo_watermarked/large.mp4"
           src={background2}
           type="video/mp4"
           style={{ width: "100%", height: "100%", objectFit: "cover" }}

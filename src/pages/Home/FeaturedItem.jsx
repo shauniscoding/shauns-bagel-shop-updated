@@ -39,10 +39,9 @@ const FeaturedItem = ({ title, description, image, isLeft }) => {
             className="featured-title"
             style={{
               fontSize: "5vw",
-              maxWidth: "30vw",
+              maxWidth: "35vw",
               marginBottom: 10,
               marginTop: 0,
-              fontFamily: "amiko",
               lineHeight: 0.8,
             }}
           >
@@ -55,7 +54,6 @@ const FeaturedItem = ({ title, description, image, isLeft }) => {
               maxWidth: "37vw",
               marginTop: 10,
               marginBottom: 0,
-              fontFamily: "amiko",
               lineHeight: 1.1,
             }}
           >
@@ -100,11 +98,9 @@ const FeaturedItem = ({ title, description, image, isLeft }) => {
             className="featured-title"
             style={{
               fontSize: "5vw",
-              maxWidth: "30vw",
+              maxWidth: "35vw",
               marginBottom: 10,
               marginTop: 0,
-              fontFamily: "amiko",
-              lineHeight: 0.8,
             }}
           >
             {title}
@@ -116,7 +112,6 @@ const FeaturedItem = ({ title, description, image, isLeft }) => {
               maxWidth: "37vw",
               marginTop: 10,
               marginBottom: 0,
-              fontFamily: "amiko",
               lineHeight: 1.1,
             }}
           >

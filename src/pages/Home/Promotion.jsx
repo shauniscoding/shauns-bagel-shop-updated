@@ -58,9 +58,8 @@ const Promotion = ({ title, description, image, isLeft }) => {
             <h1
               className="promotion-title"
               style={{
-                fontSize: "3.1vw",
+                fontSize: "3vw",
                 marginBottom: 10,
-                fontFamily: "amiko",
                 lineHeight: 1.1,
               }}
             >
@@ -71,7 +70,6 @@ const Promotion = ({ title, description, image, isLeft }) => {
               style={{
                 marginTop: 20,
                 fontSize: "1.3vw",
-                fontFamily: "amiko",
                 textAlign: "left",
               }}
             >
@@ -151,9 +149,8 @@ const Promotion = ({ title, description, image, isLeft }) => {
             <h1
               className="promotion-title"
               style={{
-                fontSize: "3.1vw",
+                fontSize: "3vw",
                 marginBottom: 10,
-                fontFamily: "amiko",
                 lineHeight: 1.1,
               }}
             >
@@ -164,7 +161,6 @@ const Promotion = ({ title, description, image, isLeft }) => {
               style={{
                 marginTop: 20,
                 fontSize: "1.3vw",
-                fontFamily: "amiko",
                 textAlign: "left",
               }}
             >

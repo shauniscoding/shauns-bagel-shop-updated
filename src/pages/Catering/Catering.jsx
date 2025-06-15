@@ -223,11 +223,6 @@ const Catering = () => {
         Get fresh breakfast delivered with customizable catering packages. Choose from bagels, sandwiches, and more — perfect for meetings, events, or any group that loves a great start to the day. </p>
       </div>
 
-
-      {/* <div style={{ width: "100%", textAlign: "center", marginBottom: "0.6vw" }}>
-        <h1 style={{ fontSize: "2.8vw", margin: 0 }}>Perfect for any morning!</h1>
-      </div> */}
-
       <div className="catering-icons-container">
         {iconData.map((item, idx) => (
           <div className="catering-icon-wrapper" key={idx}>
@@ -244,7 +239,7 @@ const Catering = () => {
       </div>
 
 
-        <h1 style={{fontSize: "6vw", fontFamily: "Arial, sans-serif", marginTop: "10vw", textAlign: "center"}}>
+        <h1 style={{fontSize: "6vw", marginTop: "10vw", textAlign: "center"}}>
           Our Packages
         </h1>
 
