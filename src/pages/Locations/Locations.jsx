@@ -256,8 +256,8 @@ const Locations = () => {
             <img src={loading} style={{ width: "5vw", height: "5vw" }} />
 
             {loadingTimeoutExpired && (
-              <p style={{ marginTop: "1rem", color: "red" }}>
-                Waiting for server to boot, please wait a moment...
+              <p style={{ fontSize: "1vw", marginTop: "0.5vw", color: "#aaa" }}>
+                Waiting for server to boot...
               </p>
             )}
 
@@ -301,8 +301,8 @@ const Locations = () => {
           <>
             <img src={loading} style={{ width: "5vw", height: "5vw" }} />
             {loadingTimeoutExpired && (
-              <p style={{ marginTop: "1rem", color: "red" }}>
-                Waiting for server to boot, please wait a moment...
+              <p style={{ fontSize: "1vw", marginTop: "0.5vw", color: "#aaa" }}>
+                Waiting for server to boot...
               </p>
             )}
           </>
